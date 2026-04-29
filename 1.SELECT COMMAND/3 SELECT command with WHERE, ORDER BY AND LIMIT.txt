@@ -1,0 +1,120 @@
+1.List names of employees whose job is MANAGER
+ select ename from emp where job="Manager";
++---------+
+| ename   |
++---------+
+| JONES   |
+| BLAKE   |
+| CLARK   |
+| HOFFMAN |
+| ALEX    |
++---------+
+
+2. List names of employee having salary greater than equal to 3000. 
+ select ename from emp where sal >= 3000;
++---------+
+| ename   |
++---------+
+| AARAV   |
+| SCOTT   |
+| KING    |
+| FRED    |
+| FORD    |
+| HOFFMAN |
++---------+
+
+3.List all employees having ‘A’ as second letter in their names. 
+select ename from emp where ename like '_A%';
++---------+
+| ename   |
++---------+
+| BANDISH |
+| AARAV   |
+| WARD    |
+| MARTIN  |
+| JAMES   |
+| AARUSH  |
+| NATASHA |
+| SANGITA |
++---------+
+
+4. List the Employee Number, Name, Hiredate and Job Title of the Employees in the Department 10. 
+select empno , ename,sal from emp where deptno=10;
++-------+--------+------+
+| empno | ename  | sal  |
++-------+--------+------+
+|  7415 | AARAV  | 3350 |
+|  7421 | THOMAS | 1750 |
+|  7782 | CLARK  | 2450 |
+|  7839 | KING   | 5000 |
+|  7934 | MILLER | 1300 |
++-------+--------+------+
+
+5.Display the details of those Employees who earn a monthly Salary of more than 2000. 
+ select * from emp where sal >= 2000;
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+| EMPNO | ENAME   | GENDER | JOB            | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD        | PHONE      | isActive |
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+|  7415 | AARAV   | M      | CLERK          | 7902 | 1981-12-31 | 3350 | NULL |     10 |    NULL | AARAV      | NULL       | 7032300084 |        0 |
+|  7566 | JONES   | M      | MANAGER        | 7839 | 1981-04-02 | 2975 | NULL |     20 |       4 | HONEYCOMB  | a12recmpm  | 7132300039 |        1 |
+|  7698 | BLAKE   | M      | MANAGER        | 7839 | 1981-05-01 | 2850 | NULL |     30 |       1 | BIG BEN    | sales@2017 | 7132300027 |        1 |
+|  7782 | CLARK   | M      | MANAGER        | 7839 | 1981-06-09 | 2450 | NULL |     10 |       3 | CLARK      | r50mpm     | 7032300001 |        1 |
+|  7788 | SCOTT   | M      | ANALYST        | 7566 | 1982-12-09 | 3000 | NULL |     20 |       3 | WHITE SAND | a12recmpm  | NULL       |        1 |
+|  7839 | KING    | M      | PRESIDENT      | NULL | 1981-11-17 | 5000 | NULL |     10 |       1 | KING       | r50mpm     | 7132300081 |        1 |
+|  7840 | FRED    | M      | vice PRESIDENT | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE | a12recmpm  | NULL       |        1 |
+|  7888 | Ruhan   | M      | Network        | 7888 | 1983-08-09 | 2000 | NULL |     60 |       1 | Ruhan      | BRD@1122   | NULL       |        1 |
+|  7902 | FORD    | M      | ANALYST        | 7566 | 1981-12-03 | 3000 | NULL |     20 |       4 | CONBRIO    | a12recmpm  | NULL       |        0 |
+|  7919 | HOFFMAN | M      | MANAGER        | 7566 | 1982-03-24 | 4150 | NULL |     30 |       3 | INTERVAL   | sales@2017 | NULL       |        1 |
+|  7920 | GRASS   | M      | SALESMAN       | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS      | sales@2017 | NULL       |        1 |
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+
+6.Display the names of all Employees from Department 10 and 20 whose name start with “A” and ends with “B”.
+select ename from emp where deptno in (10,20) and ename like 'A%B';
+Empty set
+
+
+7. Display the details of the employees who have joined on 21-DEC-1990. 
+ select * from emp where hiredate=1990-12-21;
+Empty set
+
+
+8.Display the Employee Code, Name, Job & Annual Salary for all Employees belonging to Department Number 10.  
+ select empno,ename,job,sal from emp where deptno=10;
++-------+--------+-----------+------+
+| empno | ename  | job       | sal  |
++-------+--------+-----------+------+
+|  7415 | AARAV  | CLERK     | 3350 |
+|  7421 | THOMAS | CLERK     | 1750 |
+|  7782 | CLARK  | MANAGER   | 2450 |
+|  7839 | KING   | PRESIDENT | 5000 |
+|  7934 | MILLER | CLERK     | 1300 |
++-------+--------+-----------+------+
+
+9.Display the details of the Employees who earn an Annual salary of more than 25000. Sort the records in the 
+descending order of Salary. 
+
+
+select * from emp where sal*12 >= 25000 order by sal desc;
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+| EMPNO | ENAME   | GENDER | JOB            | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD        | PHONE      | isActive |
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+|  7839 | KING    | M      | PRESIDENT      | NULL | 1981-11-17 | 5000 | NULL |     10 |       1 | KING       | r50mpm     | 7132300081 |        1 |
+|  7840 | FRED    | M      | vice PRESIDENT | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE | a12recmpm  | NULL       |        1 |
+|  7919 | HOFFMAN | M      | MANAGER        | 7566 | 1982-03-24 | 4150 | NULL |     30 |       3 | INTERVAL   | sales@2017 | NULL       |        1 |
+|  7415 | AARAV   | M      | CLERK          | 7902 | 1981-12-31 | 3350 | NULL |     10 |    NULL | AARAV      | NULL       | 7032300084 |        0 |
+|  7788 | SCOTT   | M      | ANALYST        | 7566 | 1982-12-09 | 3000 | NULL |     20 |       3 | WHITE SAND | a12recmpm  | NULL       |        1 |
+|  7902 | FORD    | M      | ANALYST        | 7566 | 1981-12-03 | 3000 | NULL |     20 |       4 | CONBRIO    | a12recmpm  | NULL       |        0 |
+|  7566 | JONES   | M      | MANAGER        | 7839 | 1981-04-02 | 2975 | NULL |     20 |       4 | HONEYCOMB  | a12recmpm  | 7132300039 |        1 |
+|  7698 | BLAKE   | M      | MANAGER        | 7839 | 1981-05-01 | 2850 | NULL |     30 |       1 | BIG BEN    | sales@2017 | 7132300027 |        1 |
+|  7920 | GRASS   | M      | SALESMAN       | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS      | sales@2017 | NULL       |        1 |
+|  7782 | CLARK   | M      | MANAGER        | 7839 | 1981-06-09 | 2450 | NULL |     10 |       3 | CLARK      | r50mpm     | 7032300001 |        1 |
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+
+
+10.Display the names of Employees whose names contain the character “F”.
+
+
+
+
+
+
