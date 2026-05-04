@@ -112,9 +112,398 @@ select * from emp where sal*12 >= 25000 order by sal desc;
 
 
 10.Display the names of Employees whose names contain the character “F”.
+ select ename from emp where ename like '%F%';
++---------+
+| ename   |
++---------+
+| FRED    |
+| FORD    |
+| HOFFMAN |
++---------+
+
+
+11. Display the Employee Code, Name, Job & Annual Salary for all Employees belonging to Department Number
+10.
+select empno,ename,job,sal from emp where deptno=10;
++-------+--------+-----------+------+
+| empno | ename  | job       | sal  |
++-------+--------+-----------+------+
+|  7415 | AARAV  | CLERK     | 3350 |
+|  7421 | THOMAS | CLERK     | 1750 |
+|  7782 | CLARK  | MANAGER   | 2450 |
+|  7839 | KING   | PRESIDENT | 5000 |
+|  7934 | MILLER | CLERK     | 1300 |
++-------+--------+-----------+------+
 
 
 
+12. Display the details of the Employees who earn an Annual salary of more than 25000. Sort the records in the
+descending order of Salary.
+
+select * from emp where sal*12 >= 25000 order by sal desc;
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+| EMPNO | ENAME   | GENDER | JOB            | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD        | PHONE      | isActive |
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+|  7839 | KING    | M      | PRESIDENT      | NULL | 1981-11-17 | 5000 | NULL |     10 |       1 | KING       | r50mpm     | 7132300081 |        1 |
+|  7840 | FRED    | M      | vice PRESIDENT | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE | a12recmpm  | NULL       |        1 |
+|  7919 | HOFFMAN | M      | MANAGER        | 7566 | 1982-03-24 | 4150 | NULL |     30 |       3 | INTERVAL   | sales@2017 | NULL       |        1 |
+|  7415 | AARAV   | M      | CLERK          | 7902 | 1981-12-31 | 3350 | NULL |     10 |    NULL | AARAV      | NULL       | 7032300084 |        0 |
+|  7788 | SCOTT   | M      | ANALYST        | 7566 | 1982-12-09 | 3000 | NULL |     20 |       3 | WHITE SAND | a12recmpm  | NULL       |        1 |
+|  7902 | FORD    | M      | ANALYST        | 7566 | 1981-12-03 | 3000 | NULL |     20 |       4 | CONBRIO    | a12recmpm  | NULL       |        0 |
+|  7566 | JONES   | M      | MANAGER        | 7839 | 1981-04-02 | 2975 | NULL |     20 |       4 | HONEYCOMB  | a12recmpm  | 7132300039 |        1 |
+|  7698 | BLAKE   | M      | MANAGER        | 7839 | 1981-05-01 | 2850 | NULL |     30 |       1 | BIG BEN    | sales@2017 | 7132300027 |        1 |
+|  7920 | GRASS   | M      | SALESMAN       | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS      | sales@2017 | NULL       |        1 |
+|  7782 | CLARK   | M      | MANAGER        | 7839 | 1981-06-09 | 2450 | NULL |     10 |       3 | CLARK      | r50mpm     | 7032300001 |        1 |
++-------+---------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+
+13.Display the names of Employees whose names contain the character “F”.
+ select ename from emp where ename like '%F%';
++---------+
+| ename   |
++---------+
+| FRED    |
+| FORD    |
+| HOFFMAN |
++---------+
+
+
+14.Display the Names and Numbers of all Departments in the descending order of the Department Names.
+ select ename,deptno from emp order by job desc;
++----------+--------+
+| ename    | deptno |
++----------+--------+
+| FRED     |     20 |
+| Neel     |     60 |
+| ALLEN    |     30 |
+| WARD     |     30 |
+| MARTIN   |     30 |
+| TURNER   |     30 |
+| GRASS    |     30 |
+| AARUSH   |     30 |
+| SHARMIN  |     20 |
+| BANDISH  |     20 |
+| KING     |     10 |
+| Ruhan    |     60 |
+| JONES    |     20 |
+| BLAKE    |     30 |
+| CLARK    |     10 |
+| HOFFMAN  |     30 |
+| ALEX     |     30 |
+| GITA     |     30 |
+| VRUSHALI |     50 |
+| SANGITA  |     50 |
+| SMITH    |     20 |
+| AARAV    |     10 |
+| THOMAS   |     10 |
+| ADAMS    |     20 |
+| JAMES    |     30 |
+| MILLER   |     10 |
+| NATASHA  |     30 |
+| SCOTT    |     20 |
+| FORD     |     20 |
+| SUPRIYA  |     50 |
++----------+--------+
+
+15.Display the Name, Employee Number, Designation and Salary of those Employees who earn a monthly salary
+of not less than 1000 and not more than 2000
+select ename,empno,job,sal from emp where sal > 1000 and sal < 2000;
++----------+-------+---------------------+------+
+| ename    | empno | job                 | sal  |
++----------+-------+---------------------+------+
+| GITA     |  6001 | Compliance officers | 1750 |
+| VRUSHALI |  6129 | Compliance officers | 1750 |
+| SHARMIN  |  6473 | Public Relation     | 1750 |
+| BANDISH  |  6781 | Public Relation     | 1750 |
+| THOMAS   |  7421 | CLERK               | 1750 |
+| ALLEN    |  7499 | SALESMAN            | 1600 |
+| WARD     |  7521 | SALESMAN            | 1250 |
+| MARTIN   |  7654 | SALESMAN            | 1250 |
+| TURNER   |  7844 | SALESMAN            | 1500 |
+| ADAMS    |  7876 | CLERK               | 1100 |
+| MILLER   |  7934 | CLERK               | 1300 |
+| AARUSH   |  7945 | SALESMAN            | 1350 |
+| ALEX     |  7949 | MANAGER             | 1250 |
+| NATASHA  |  8433 | CLERK               | 1750 |
+| SANGITA  |  9400 | Compliance officers | 1750 |
+| SUPRIYA  |  9473 | ANALYST             | 1750 |
++----------+-------+---------------------+------+
+
+16. Find out the Bonus (Bonus 1.1% of Annual Salary) that every person will receive at the end of the year.
+select * from emp where comm > (0.05 * sal);
++-------+--------+--------+----------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+| EMPNO | ENAME  | GENDER | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME    | PWD        | PHONE      | isActive |
++-------+--------+--------+----------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+|  7499 | ALLEN  | M      | SALESMAN | 7698 | 1981-02-20 | 1600 |  300 |     30 |       4 | ALWAYS TESTE | sales@2017 | 7032300096 |        1 |
+|  7521 | WARD   | M      | SALESMAN | 7698 | 1981-02-22 | 1250 |  500 |     30 |       1 | WARD         | sales@2017 | 7132300034 |        1 |
+|  7654 | MARTIN | M      | SALESMAN | 7698 | 1981-09-28 | 1250 | 1400 |     30 |       6 | LIFE RACER   | sales@2017 | 7132300050 |        1 |
+|  7920 | GRASS  | M      | SALESMAN | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS        | sales@2017 | NULL       |        1 |
+|  7934 | MILLER | M      | CLERK    | 7782 | 1982-01-23 | 1300 | 1300 |     10 |       2 | QUARTERNOTE  | r50mpm     | 7132300055 |        0 |
+|  7945 | AARUSH | M      | SALESMAN | 7902 | 1980-02-14 | 1350 | 2700 |     30 |    NULL | AARUSH       | ABCDEF     | NULL       |        0 |
+|  7949 | ALEX   | M      | MANAGER  | 7698 | 1982-01-24 | 1250 |  500 |     30 |       5 | QUARTERREST  | sales@2017 | 7156567183 |        1 |
++-------+--------+--------+----------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+
+
+17. Display the Name, Job and Dept No. of all the Employees who either work in Department 30 or in Department
+40.
+ select ename,job,deptno from emp where deptno in (30,40);
++---------+---------------------+--------+
+| ename   | job                 | deptno |
++---------+---------------------+--------+
+| GITA    | Compliance officers |     30 |
+| ALLEN   | SALESMAN            |     30 |
+| WARD    | SALESMAN            |     30 |
+| MARTIN  | SALESMAN            |     30 |
+| BLAKE   | MANAGER             |     30 |
+| TURNER  | SALESMAN            |     30 |
+| JAMES   | CLERK               |     30 |
+| HOFFMAN | MANAGER             |     30 |
+| GRASS   | SALESMAN            |     30 |
+| AARUSH  | SALESMAN            |     30 |
+| ALEX    | MANAGER             |     30 |
+| NATASHA | CLERK               |     30 |
++---------+---------------------+--------+
+
+
+29. Create query to display the Employee Name and Department Number for empno 7566.
+select ename ,deptno from emp where empno=7566;
++-------+--------+
+| ename | deptno |
++-------+--------+
+| JONES |     20 |
++-------+--------+
+
+
+30. List the Name and Salary of Employees who earn more than $1500 and are in Department 10 or 30. Label the
+columns NAME and Monthly Salary, respectively.
+ select ename as NAME , sal as "MONTHLY SALARY" from emp where sal > 1500 and deptno in (30,40);
++---------+----------------+
+| NAME    | MONTHLY SALARY |
++---------+----------------+
+| GITA    |           1750 |
+| ALLEN   |           1600 |
+| BLAKE   |           2850 |
+| HOFFMAN |           4150 |
+| GRASS   |           2575 |
+| NATASHA |           1750 |
++---------+----------------+
+
+
+31. Display the Name, Salary and Commission for all Employees who earn Commission. Sort data in descending
+order of Salary and Commission.
+ select ename ,sal ,comm from emp where comm is not null order by sal desc, comm desc;
++--------+------+------+
+| ename  | sal  | comm |
++--------+------+------+
+| GRASS  | 2575 | 2700 |
+| ALLEN  | 1600 |  300 |
+| TURNER | 1500 |    0 |
+| AARUSH | 1350 | 2700 |
+| MILLER | 1300 | 1300 |
+| MARTIN | 1250 | 1400 |
+| WARD   | 1250 |  500 |
+| ALEX   | 1250 |  500 |
++--------+------+------+
+
+
+31. Display the Name, Salary and Commission for all Employees who earn Commission. Sort data in descending
+order of Salary and Commission.
+select ename from emp where ename like '__A%';
++---------+
+| ename   |
++---------+
+| SHARMIN |
+| BLAKE   |
+| CLARK   |
+| ADAMS   |
+| GRASS   |
++---------+
+
+33. Display the name of all Employees that have two ‘LS’ in the name and are in department 30 or their manager
+is 7782.
+ select ename from emp where ename like '%LS%LS%' and deptno = 30 or mgr=7782;
++--------+
+| ename  |
++--------+
+| MILLER |
++--------+
+
+34. Display Name, Job & Sal for all Emp whose job is Clerk or Analyst and their Sal is not equal to 1000, 3000 &
+5000.
+
+ select ename , job ,sal from emp where job in ('clerk','analyst') and sal not in (1000,3000,5000);
++---------+---------+------+
+| ename   | job     | sal  |
++---------+---------+------+
+| SMITH   | CLERK   |  800 |
+| AARAV   | CLERK   | 3350 |
+| THOMAS  | CLERK   | 1750 |
+| ADAMS   | CLERK   | 1100 |
+| JAMES   | CLERK   |  950 |
+| MILLER  | CLERK   | 1300 |
+| NATASHA | CLERK   | 1750 |
+| SUPRIYA | ANALYST | 1750 |
++---------+---------+------+
+
+35. Display the Name, Sal & Comm for all Employees whose Comm amount is greater than their Sal increased by
+10%.
+
+select ename ,sal,comm from emp where comm > (sal * 0.10);
++--------+------+------+
+| ename  | sal  | comm |
++--------+------+------+
+| ALLEN  | 1600 |  300 |
+| WARD   | 1250 |  500 |
+| MARTIN | 1250 | 1400 |
+| GRASS  | 2575 | 2700 |
+| MILLER | 1300 | 1300 |
+| AARUSH | 1350 | 2700 |
+| ALEX   | 1250 |  500 |
++--------+------+------+
+
+36. Display Employee Number, Name, Gross Salary (Bonus + Salary*12 + Commission) for all those Employees
+who belong to Department Number 20 or 30 in the ascending order of Employee Numbers.
+select empno,ename, (sal + coalesce(comm,0) + sal * 12 + coalesce(comm,0) ) as "Gross Salary" from emp where deptno in (20,30) order by empno asc;
++-------+---------+--------------+
+| empno | ename   | Gross Salary |
++-------+---------+--------------+
+|  6001 | GITA    |        22750 |
+|  6473 | SHARMIN |        22750 |
+|  6781 | BANDISH |        22750 |
+|  7369 | SMITH   |        10400 |
+|  7499 | ALLEN   |        21400 |
+|  7521 | WARD    |        17250 |
+|  7566 | JONES   |        38675 |
+|  7654 | MARTIN  |        19050 |
+|  7698 | BLAKE   |        37050 |
+|  7788 | SCOTT   |        39000 |
+|  7840 | FRED    |        65000 |
+|  7844 | TURNER  |        19500 |
+|  7876 | ADAMS   |        14300 |
+|  7900 | JAMES   |        12350 |
+|  7902 | FORD    |        39000 |
+|  7919 | HOFFMAN |        53950 |
+|  7920 | GRASS   |        38875 |
+|  7945 | AARUSH  |        22950 |
+|  7949 | ALEX    |        17250 |
+|  8433 | NATASHA |        22750 |
++-------+---------+--------------+
+
+37. Display the Employee Number, Name, Salary, and Salary Increase by 15% expressed as a whole number.
+Label the column New Salary.
+
+select empno as eid,ename as name ,sal , sal + truncate(sal * 0.15,0) as "New Salary" from emp;
++------+----------+------+------------+
+| eid  | name     | sal  | New Salary |
++------+----------+------+------------+
+| 6001 | GITA     | 1750 |       2012 |
+| 6129 | VRUSHALI | 1750 |       2012 |
+| 6473 | SHARMIN  | 1750 |       2012 |
+| 6781 | BANDISH  | 1750 |       2012 |
+| 7369 | SMITH    |  800 |        920 |
+| 7415 | AARAV    | 3350 |       3852 |
+| 7421 | THOMAS   | 1750 |       2012 |
+| 7499 | ALLEN    | 1600 |       1840 |
+| 7521 | WARD     | 1250 |       1437 |
+| 7566 | JONES    | 2975 |       3421 |
+| 7654 | MARTIN   | 1250 |       1437 |
+| 7698 | BLAKE    | 2850 |       3277 |
+| 7782 | CLARK    | 2450 |       2817 |
+| 7788 | SCOTT    | 3000 |       3450 |
+| 7839 | KING     | 5000 |       5750 |
+| 7840 | FRED     | 5000 |       5750 |
+| 7844 | TURNER   | 1500 |       1725 |
+| 7876 | ADAMS    | 1100 |       1265 |
+| 7888 | Ruhan    | 2000 |       2300 |
+| 7889 | Neel     | 1000 |       1150 |
+| 7900 | JAMES    |  950 |       1092 |
+| 7902 | FORD     | 3000 |       3450 |
+| 7919 | HOFFMAN  | 4150 |       4772 |
+| 7920 | GRASS    | 2575 |       2961 |
+| 7934 | MILLER   | 1300 |       1495 |
+| 7945 | AARUSH   | 1350 |       1552 |
+| 7949 | ALEX     | 1250 |       1437 |
+| 8433 | NATASHA  | 1750 |       2012 |
+| 9400 | SANGITA  | 1750 |       2012 |
+| 9473 | SUPRIYA  | 1750 |       2012 |
++------+----------+------+------------+
+
+38. Write a query that will display the employees name with the first letter capitalized an other letters
+lowercase and the length of their name, for all employees whose name starts with J, A or M.
+ select concat(upper(left(ename,1)),lower(substring(ename,2))) as name ,length(ename) as "Length of Name" from emp where ename like "J%" or ename like "A%" or ename like "M%";
++--------+----------------+
+| name   | Length of Name |
++--------+----------------+
+| Aarav  |              5 |
+| Allen  |              5 |
+| Jones  |              5 |
+| Martin |              6 |
+| Adams  |              5 |
+| James  |              5 |
+| Miller |              6 |
+| Aarush |              6 |
+| Alex   |              4 |
++--------+----------------+
+
+
+39. Create a query that will display the Employees name and commission amount. If the employee does not
+earn commission, put “No Commission”.
+
+select ename , case when comm is null then "No Commision" when comm is not null then comm end as commision from emp;
++----------+--------------+
+| ename    | commision    |
++----------+--------------+
+| GITA     | No Commision |
+| VRUSHALI | No Commision |
+| SHARMIN  | No Commision |
+| BANDISH  | No Commision |
+| SMITH    | No Commision |
+| AARAV    | No Commision |
+| THOMAS   | No Commision |
+| ALLEN    | 300          |
+| WARD     | 500          |
+| JONES    | No Commision |
+| MARTIN   | 1400         |
+| BLAKE    | No Commision |
+| CLARK    | No Commision |
+| SCOTT    | No Commision |
+| KING     | No Commision |
+| FRED     | No Commision |
+| TURNER   | 0            |
+| ADAMS    | No Commision |
+| Ruhan    | No Commision |
+| Neel     | No Commision |
+| JAMES    | No Commision |
+| FORD     | No Commision |
+| HOFFMAN  | No Commision |
+| GRASS    | 2700         |
+| MILLER   | 1300         |
+| AARUSH   | 2700         |
+| ALEX     | 500          |
+| NATASHA  | No Commision |
+| SANGITA  | No Commision |
+| SUPRIYA  | No Commision |
++----------+--------------+
+
+40. Display Customers Name, Sales Amount approximate Profit Earned (Profit = 8% of Sales Amount) in
+whole numbers.   
+ SELECT custname,
+    ->        SUM(amount) AS total_amount,
+    ->        ROUND(SUM(amount) * 0.08) AS "Profit earned"
+    -> FROM sales
+    -> GROUP BY custname;
++----------------+--------------+---------------+
+| custname       | total_amount | Profit earned |
++----------------+--------------+---------------+
+| JOCKSPORTS     |      5280.90 |           422 |
+| TKB SPORT SHOP |       101.40 |             8 |
+| VOLLYRITE      |     27775.50 |          2222 |
+| JUST TENNIS    |       764.00 |            61 |
+| EVERY MOUNTAIN |      7160.80 |           573 |
+| K + T SPORTS   |     46370.00 |          3710 |
+| SHAPE UP       |       700.40 |            56 |
+| WOMENS SPORTS  |       710.00 |            57 |
+| NORTH WOODS    |      6400.00 |           512 |
++----------------+--------------+---------------+
 
 
 
