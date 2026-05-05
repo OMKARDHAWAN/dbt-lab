@@ -507,3 +507,148 @@ whole numbers.
 
 
 
+41. Using the sales table, you need to report the following 
+a.Sales for the first quarter of the year of 1999
+b.Sales for the product SP TENNIS RACKET
+select prodname, sum(amount) as "Total Sales" from sales where prodname="SP TENNIS RACKET";
++------------------+-------------+
+| prodname         | Total Sales |
++------------------+-------------+
+| SP TENNIS RACKET |     7224.00 |
++------------------+-------------+
+
+
+42. Consider the Customer table. The Credit Limit of all the Customers is increased by 25%. Calculate the
+new Credit Limit and display the same along with the Name, Repid and Credit Limit for all the
+Customers. The following should be implemented in the query result set:
+a. The Credit Limit should be expressed as a whole number, prefixed with a $ symbol.
+b. Total length of the new Credit Limit should be 10.
+c. Names of the Customers should be displayed in the title case.
+
+SELECT
+    -> name,
+    -> LPAD(CONCAT('$', TRUNCATE(creditlimit * 1.25, 0)), 10, ' ') AS `New Credit Limit`
+    -> FROM customer;
++-------------------+------------------+
+| name              | New Credit Limit |
++-------------------+------------------+
+| JOCKSPORTS        |      $6250       |
+| TKB SPORT SHOP    |     $12500       |
+| VOLLYRITE         |      $8750       |
+| JUST TENNIS       |      $3750       |
+| EVERY MOUNTAIN    |     $12500       |
+| K + T SPORTS      |      $6250       |
+| SHAPE UP          |      $7500       |
+| WOMENS SPORTS     |     $12500       |
+| NORTH WOODS       |     $10000       |
+| Saleel Sports     |     $10000       |
+| Raj Sports Center |     $31250       |
+| West WOODS        |     $10000       |
+| South WOODS       |     $10000       |
++-------------------+------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+43. Display the name and the department number of all employees. The department number should be 
+displayed in the following manner: 
+a. If the department number is 10, display ‘Belongs to Dept. 10’
+b. If 20, display ‘Belongs to the Dept. 20’
+c. Otherwise display ‘Neither 10 nor 20.’
+
+
+select ename , case when deptno=10 then 'Belong to Dept 10' when deptno=20 then 'Belong to Dept 20' else  'Neither 10 nor 20' end as Departno from emp;
++----------+-------------------+
+| ename    | Departno          |
++----------+-------------------+
+| John     | Neither 10 nor 20 |
+| VRUSHALI | Neither 10 nor 20 |
+| SHARMIN  | Belong to Dept 20 |
+| BANDISH  | Belong to Dept 20 |
+| SMITH    | Belong to Dept 20 |
+| AARAV    | Belong to Dept 10 |
+| THOMAS   | Belong to Dept 10 |
+| ALLEN    | Neither 10 nor 20 |
+| WARD     | Neither 10 nor 20 |
+| JONES    | Belong to Dept 20 |
+| MARTIN   | Neither 10 nor 20 |
+| BLAKE    | Neither 10 nor 20 |
+| CLARK    | Belong to Dept 10 |
+| SCOTT    | Belong to Dept 20 |
+| KING     | Belong to Dept 10 |
+| FRED     | Belong to Dept 20 |
+| TURNER   | Neither 10 nor 20 |
+| ADAMS    | Belong to Dept 20 |
+| Ruhan    | Neither 10 nor 20 |
+| Neel     | Neither 10 nor 20 |
+| JAMES    | Neither 10 nor 20 |
+| FORD     | Belong to Dept 20 |
+| HOFFMAN  | Neither 10 nor 20 |
+| GRASS    | Neither 10 nor 20 |
+| MILLER   | Belong to Dept 10 |
+| AARUSH   | Neither 10 nor 20 |
+| ALEX     | Neither 10 nor 20 |
+| NATASHA  | Neither 10 nor 20 |
+| SANGITA  | Neither 10 nor 20 |
+| SUPRIYA  | Neither 10 nor 20 |
++----------+-------------------+
+
+44. Display the name, first letter of the name (as Abbreviated Name) and the annual compensation for all 
+employees. The following issues should be taken care of:
+a. The annual compensation has to be calculated by adding the salary and the commission earned by 
+the employee and multiplying the value by 12.
+b. The first letter of the employee name should be in upper case. 
+c. If the employee does not earn any commission, the commission values should be taken as 600. 
+
+select  concat( upper(left(ename,1)),lower(substring(ename,2,2))) as name, (sal + if(comm is null ,600,comm)) * 12 as "Annual Commision" from emp  ;
++------+------------------+
+| name | Annual Commision |
++------+------------------+
+| Joh  |            28200 |
+| Vru  |            28200 |
+| Sha  |            28200 |
+| Ban  |            28200 |
+| Smi  |            16800 |
+| Aar  |            47400 |
+| Tho  |            28200 |
+| All  |            22800 |
+| War  |            21000 |
+| Jon  |            42900 |
+| Mar  |            31800 |
+| Bla  |            41400 |
+| Cla  |            36600 |
+| Sco  |            43200 |
+| Kin  |            67200 |
+| Fre  |            67200 |
+| Tur  |            18000 |
+| Ada  |            20400 |
+| Ruh  |            31200 |
+| Nee  |            19200 |
+| Jam  |            18600 |
+| For  |            43200 |
+| Hof  |            57000 |
+| Gra  |            63300 |
+| Mil  |            31200 |
+| Aar  |            48600 |
+| Ale  |            21000 |
+| Nat  |            28200 |
+| San  |            28200 |
+| Sup  |            28200 |
++------+------------------+
+
+
+
+
+
+
