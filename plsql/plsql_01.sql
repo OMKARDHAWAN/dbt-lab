@@ -1,7 +1,13 @@
+
 drop procedure if exists  pro1;
 delimiter $
 create procedure pro1()
 BEGIN
-   select 'hello world' R1;
+   declare x int;
+   declare y int default 20;
+   
+   set x := 10;
+ 
+   select x + y;
 end $
 delimiter ;
