@@ -752,6 +752,44 @@ employees.
 
 53. Write a query to display all the details from dept table along with the no. of employee
 working in each dept.
+select d.deptno as dno ,d.dname ,d.loc,d.pwd, d.startedon , count(e.ename) as "no of emp" from dept d left join emp e on d.deptno = e.deptno group by d.deptno;
++-----+------------+----------+------------+------------+-----------+
+| dno | dname      | loc      | pwd        | startedon  | no of emp |
++-----+------------+----------+------------+------------+-----------+
+|  10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 |         5 |
+|  20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |         8 |
+|  30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |        12 |
+|  40 | OPERATIONS | BOSTON   | opr@123    | 12/07/1989 |         0 |
+|  50 | HR         | PUNE     | PUN@8877   | 22/12/1989 |         3 |
+|  60 | IT         | BARODA   | BRD@1122   | 02/10/1989 |         2 |
++-----+------------+----------+------------+------------+-----------+
+
+54. Find out which department does not have any employees.
+select d.deptno as dno ,d.dname ,d.loc,d.pwd, d.startedon , count(e.ename) as 'no of emp' from dept d left join emp e on d.deptno = e.deptno group by d.deptno order by count(e.ename) limit 1 ;
++-----+------------+--------+---------+------------+-----------+
+| dno | dname      | loc    | pwd     | startedon  | no of emp |
++-----+------------+--------+---------+------------+-----------+
+|  40 | OPERATIONS | BOSTON | opr@123 | 12/07/1989 |         0 |
++-----+------------+--------+---------+------------+-----------+
+
+
+55. List out the no. of employees joined in every month in ascending order.
+ select monthname(hiredate) as Month,count(ename)  as 'no of emp' from emp group by Month , month(hiredate) order by month(hiredate) asc;
++-----------+-----------+
+| Month     | no of emp |
++-----------+-----------+
+| January   |         3 |
+| February  |         4 |
+| March     |         1 |
+| April     |         1 |
+| May       |         1 |
+| June      |         1 |
+| July      |         8 |
+| August    |         3 |
+| September |         2 |
+| November  |         1 |
+| December  |         5 |
++-----------+-----------+
 
 
 
