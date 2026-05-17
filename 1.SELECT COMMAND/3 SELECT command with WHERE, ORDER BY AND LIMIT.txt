@@ -262,6 +262,32 @@ select * from emp where comm > (0.05 * sal);
 +---------+---------------------+--------+
 
 
+18.Display the Employee Number, Name for Clerks and Managers who’s Salary is more than 1500.
+select empno,ename, job from emp where job in ('clerk','manager') and sal > 1500;
++-------+---------+---------+
+| empno | ename   | job     |
++-------+---------+---------+
+|  7415 | AARAV   | CLERK   |
+|  7421 | THOMAS  | CLERK   |
+|  7566 | JONES   | MANAGER |
+|  7698 | BLAKE   | MANAGER |
+|  7782 | CLARK   | MANAGER |
+|  7919 | HOFFMAN | MANAGER |
+|  8433 | NATASHA | CLERK   |
++-------+---------+---------+
+
+
+19. Display the Name, Annual Salary and Commission as “Commission Earned” of all employees whose monthly
+salary is greater than their Commission. The output should be in decreasing order of salary. If two or more
+employees have same salary, then sort them by name within the highest order of salary.
+
+
+
+
+
+
+
+
 29. Create query to display the Employee Name and Department Number for empno 7566.
 select ename ,deptno from emp where empno=7566;
 +-------+--------+
@@ -303,8 +329,7 @@ order of Salary and Commission.
 +--------+------+------+
 
 
-31. Display the Name, Salary and Commission for all Employees who earn Commission. Sort data in descending
-order of Salary and Commission.
+32.Display the Names of all Employees with the third letter of their Name as an “A”.
 select ename from emp where ename like '__A%';
 +---------+
 | ename   |
@@ -315,6 +340,11 @@ select ename from emp where ename like '__A%';
 | ADAMS   |
 | GRASS   |
 +---------+
+
+
+
+
+
 
 33. Display the name of all Employees that have two ‘LS’ in the name and are in department 30 or their manager
 is 7782.
@@ -644,6 +674,56 @@ select  concat( upper(left(ename,1)),lower(substring(ename,2,2))) as name, (sal 
 | San  |            28200 |
 | Sup  |            28200 |
 +------+------------------+
+
+
+45.Display the Order ID, the Total Value of the Order and the Commission Plan taking into consideration
+
+the following-
+a. If the Commission Plan is A display it as Anonymous
+
+b. If the Commission Plan is B display it as Business
+c. If the Commission Plan is C display it as Casual
+d. If no Commission Plan has been mentioned then display Commission Not Allowed.
+
+select ordid,total,  case when commplan = 'A' then 'Anonymous' when commplan='B' then 'Buisness' when commplan='C' then 'Casual' else 'Commision not Allowed' end as Commplan from ord;
++-------+----------+-----------------------+
+| ordid | total    | Commplan              |
++-------+----------+-----------------------+
+|   601 |     2.40 | Anonymous             |
+|   602 |    56.00 | Buisness              |
+|   603 |   224.00 | Commision not Allowed |
+|   604 |   698.00 | Anonymous             |
+|   606 |     3.40 | Anonymous             |
+|   607 |     5.60 | Casual                |
+|   608 |    35.20 | Casual                |
+|   609 |    97.50 | Buisness              |
+|   610 |   101.40 | Anonymous             |
+|   611 |    45.00 | Buisness              |
+|   612 |  5860.00 | Casual                |
+|   613 |  6400.00 | Commision not Allowed |
+|   614 | 23940.00 | Commision not Allowed |
+|   615 |   710.00 | Commision not Allowed |
+|   616 |   764.00 | Commision not Allowed |
+|   617 | 46370.00 | Commision not Allowed |
+|   618 |  3510.50 | Anonymous             |
+|   619 |  1260.00 | Commision not Allowed |
+|   620 |  4450.00 | Commision not Allowed |
+|   621 |   730.00 | Anonymous             |
+|   622 |  1125.00 | Anonymous             |
+|   624 |   189.00 | Casual                |
+|   625 |  1255.00 | Commision not Allowed |
+|   626 |  1675.00 | Commision not Allowed |
+|   627 |   250.00 | Commision not Allowed |
+|   628 |   473.93 | Anonymous             |
+|   629 |   289.99 | Anonymous             |
+|   630 |   362.12 | Commision not Allowed |
+|   631 |   232.87 | Commision not Allowed |
+|   632 |   473.93 | Anonymous             |
+|   633 |   289.99 | Anonymous             |
+|   634 |   362.12 | Commision not Allowed |
+|   635 |   232.87 | Commision not Allowed |
++-------+----------+-----------------------+
+
 
 
 46. List all the employees who are living in ‘BOSTON’.

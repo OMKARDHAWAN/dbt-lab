@@ -252,5 +252,508 @@ select concat(concat(upper(left(ename,1)) ,lower(substring(ename,2))) , '-' ,con
 +------------------------------+
 
 
+21.List employee numbers, names and hiredates of the people working in the department
+number 20, display the hiredates in the dd/mm/yy format
+select empno,ename,date_format(hiredate,'%d/%m/%y') from emp where deptno = 20;
++-------+---------+----------------------------------+
+| empno | ename   | date_format(hiredate,'%d/%m/%y') |
++-------+---------+----------------------------------+
+|  6473 | SHARMIN | 19/07/81                         |
+|  6781 | BANDISH | 19/07/81                         |
+|  7369 | SMITH   | 17/12/80                         |
+|  7566 | JONES   | 02/04/81                         |
+|  7788 | SCOTT   | 09/12/82                         |
+|  7840 | FRED    | 09/08/83                         |
+|  7876 | ADAMS   | 12/01/83                         |
+|  7902 | FORD    | 03/12/81                         |
++-------+---------+----------------------------------+
+
+
+22.Find number of months the president has worked for the company.
+select TIMESTAMPDIFF(MONTH, hiredate, curDate()) as 'No of Month' from emp where job='President'  ;
++-------------+
+| No of Month |
++-------------+
+|         534 |
++-------------+
+
+23. Find the day of the week on which SMITH joined
+select dayname(hiredate) as 'Day of Week' from emp where ename='Smith';
++-------------+
+| Day of Week |
++-------------+
+| Wednesday   |
++-------------+
+
+
+24.Find the time of time of the day in which ADAMS joined
+ select date_format(hiredate,'%H:%i:%s') as 'timeofday' from emp where ename='adams';
++-----------+
+| timeofday |
++-----------+
+| 00:00:00  |
++-----------+
+
+25. Find day of month on which KING joined
+select day(hiredate) as 'Day Of Month' from emp where ename='adams';
++--------------+
+| Day Of Month |
++--------------+
+|           12 |
++--------------+
+
+26.Find out month on which MARTIN joined
+ select month(hiredate) as 'Month' from emp where ename = 'martin';
++-------+
+| Month |
++-------+
+|     9 |
++-------+
+
+27. Find out which quarter of the year the employees joined. Display their number and names
+as well
+
+ select empno,ename,extract(QUARTER from hiredate) as 'Quarter' from emp;
++-------+----------+---------+
+| empno | ename    | Quarter |
++-------+----------+---------+
+|  6001 | GITA     |       3 |
+|  6129 | VRUSHALI |       3 |
+|  6473 | SHARMIN  |       3 |
+|  6781 | BANDISH  |       3 |
+|  7369 | SMITH    |       4 |
+|  7415 | AARAV    |       4 |
+|  7421 | THOMAS   |       3 |
+|  7499 | ALLEN    |       1 |
+|  7521 | WARD     |       1 |
+|  7566 | JONES    |       2 |
+|  7654 | MARTIN   |       3 |
+|  7698 | BLAKE    |       2 |
+|  7782 | CLARK    |       2 |
+|  7788 | SCOTT    |       4 |
+|  7839 | KING     |       4 |
+|  7840 | FRED     |       3 |
+|  7844 | TURNER   |       3 |
+|  7876 | ADAMS    |       1 |
+|  7888 | Ruhan    |       3 |
+|  7889 | Neel     |       3 |
+|  7900 | JAMES    |       4 |
+|  7902 | FORD     |       4 |
+|  7919 | HOFFMAN  |       1 |
+|  7920 | GRASS    |       1 |
+|  7934 | MILLER   |       1 |
+|  7945 | AARUSH   |       1 |
+|  7949 | ALEX     |       1 |
+|  8433 | NATASHA  |       3 |
+|  9400 | SANGITA  |       3 |
+|  9473 | SUPRIYA  |       3 |
++-------+----------+---------+
+
+28.Retrieve ANALYST records with the hiredate formatted as – ‘The 3rd of December 1984’
+select empno,ename,gender,job,mgr, concat('The',' ',date_format(hiredate,'%D'),' ' ,'of', ' ' , date_format(hiredate,'%M'),' ',date_format(hiredate,'%Y')) as hiredate,sal,comm,deptno,bonusid,'USER NAME',pwd , phone ,isActive from emp where job = 'analyst';
++-------+---------+--------+---------+------+--------------------------+------+------+--------+---------+-----------+-----------+-------+----------+
+| empno | ename   | gender | job     | mgr  | hiredate                 | sal  | comm | deptno | bonusid | USER NAME | pwd       | phone | isActive |
++-------+---------+--------+---------+------+--------------------------+------+------+--------+---------+-----------+-----------+-------+----------+
+|  7788 | SCOTT   | M      | ANALYST | 7566 | The 9th of December 1982 | 3000 | NULL |     20 |       3 | USER NAME | a12recmpm | NULL  |        1 |
+|  7902 | FORD    | M      | ANALYST | 7566 | The 3rd of December 1981 | 3000 | NULL |     20 |       4 | USER NAME | a12recmpm | NULL  |        0 |
+|  9473 | SUPRIYA | F      | ANALYST | 7920 | The 19th of July 1981    | 1750 | NULL |     50 |       1 | USER NAME | XYZ@1234  | NULL  |        1 |
++-------+---------+--------+---------+------+--------------------------+------+------+--------+---------+-----------+-----------+-------+----------+
+
+29. List all names, jobs, and a job classification number, which is to be assigned by you.
+Translate the value started in each job field to a job classification number. This is to be
+done as follows-
+A. CLERK
+B. MANAGER
+C. PRESIDENT
+D. OTHER
+
+select ename,job , case when job = 'clerk' then 'A' when job = 'manager' then 'B' when job = 'president' then 'C' else 'D'  end as 'Job Classfication number' from emp;
++----------+---------------------+--------------------------+
+| ename    | job                 | Job Classfication number |
++----------+---------------------+--------------------------+
+| GITA     | Compliance officers | D                        |
+| VRUSHALI | Compliance officers | D                        |
+| SHARMIN  | Public Relation     | D                        |
+| BANDISH  | Public Relation     | D                        |
+| SMITH    | CLERK               | A                        |
+| AARAV    | CLERK               | A                        |
+| THOMAS   | CLERK               | A                        |
+| ALLEN    | SALESMAN            | D                        |
+| WARD     | SALESMAN            | D                        |
+| JONES    | MANAGER             | B                        |
+| MARTIN   | SALESMAN            | D                        |
+| BLAKE    | MANAGER             | B                        |
+| CLARK    | MANAGER             | B                        |
+| SCOTT    | ANALYST             | D                        |
+| KING     | PRESIDENT           | C                        |
+| FRED     | vice PRESIDENT      | D                        |
+| TURNER   | SALESMAN            | D                        |
+| ADAMS    | CLERK               | A                        |
+| Ruhan    | Network             | D                        |
+| Neel     | vice PRESIDENT      | D                        |
+| JAMES    | CLERK               | A                        |
+| FORD     | ANALYST             | D                        |
+| HOFFMAN  | MANAGER             | B                        |
+| GRASS    | SALESMAN            | D                        |
+| MILLER   | CLERK               | A                        |
+| AARUSH   | SALESMAN            | D                        |
+| ALEX     | MANAGER             | B                        |
+| NATASHA  | CLERK               | A                        |
+| SANGITA  | Compliance officers | D                        |
+| SUPRIYA  | ANALYST             | D                        |
++----------+---------------------+--------------------------+
+
+
+30. Display the length of the longest employees name
+ select max(length(ename)) as 'length of the longest employees name' from emp;
++--------------------------------------+
+| length of the longest employees name |
++--------------------------------------+
+|                                    8 |
++--------------------------------------+
+
+
+31. Write a query to list the length of service of the employees (of the form n years and m
+months).
+
+ select concat( TIMESTAMPDIFF(year, hiredate, curDate()) , ' ' , 'years' , '  ' , 'and' , ' ' ,TIMESTAMPDIFF(MONTH, hiredate, curDate()) , ' ' , 'month') as 'Length of Services' from emp;
++-------------------------+
+| Length of Services      |
++-------------------------+
+| 44 years  and 537 month |
+| 44 years  and 537 month |
+| 44 years  and 537 month |
+| 44 years  and 537 month |
+| 45 years  and 545 month |
+| 44 years  and 532 month |
+| 44 years  and 537 month |
+| 45 years  and 542 month |
+| 45 years  and 542 month |
+| 45 years  and 541 month |
+| 44 years  and 535 month |
+| 45 years  and 540 month |
+| 44 years  and 539 month |
+| 43 years  and 521 month |
+| 44 years  and 534 month |
+| 42 years  and 513 month |
+| 44 years  and 536 month |
+| 43 years  and 520 month |
+| 42 years  and 513 month |
+| 42 years  and 513 month |
+| 44 years  and 533 month |
+| 44 years  and 533 month |
+| 44 years  and 529 month |
+| 46 years  and 555 month |
+| 44 years  and 531 month |
+| 46 years  and 555 month |
+| 44 years  and 531 month |
+| 44 years  and 537 month |
+| 44 years  and 537 month |
+| 44 years  and 537 month |
++-------------------------+
+
+32. How many employees who are joined in 1985.
+select count(ename) as 'Count' from emp where year(hiredate) = 1985 ;
++-------+
+| Count |
++-------+
+|     0 |
++-------+
+
+33. How many employees joined each month in 1985.
+ select monthname(hiredate), count(*) as 'total_Emp' from emp where year(hiredate) = 1985 group by MONTH(hiredate), MONTHNAME(hiredate) order by  MONTHNAME(hiredate);
+Empty set (0.011 sec)
+
+
+34. How many employees who are joined in March 1985.
+ select count(*) as count from emp where monthname(hiredate) = 'March' and year(hiredate) = 1985;
++-------+
+| count |
++-------+
+|     0 |
++-------+
+
+35 Find the total sales amount
+select sum(amount) as 'total sales amount' from sales ;
++--------------------+
+| total sales amount |
++--------------------+
+|           95263.00 |
++--------------------+
+
+36.Find the customer-wise lowest and highest sales amount
+ select custname, min(amount) as 'lowest amount' , max(amount) as 'highest amount' from sales group by custname;
++----------------+---------------+----------------+
+| custname       | lowest amount | highest amount |
++----------------+---------------+----------------+
+| JOCKSPORTS     |         50.00 |        2400.00 |
+| TKB SPORT SHOP |          8.40 |          58.00 |
+| VOLLYRITE      |       2300.50 |       16569.00 |
+| JUST TENNIS    |         24.00 |         450.00 |
+| EVERY MOUNTAIN |         24.00 |        3000.00 |
+| K + T SPORTS   |        340.00 |       29000.00 |
+| SHAPE UP       |          2.40 |         440.00 |
+| WOMENS SPORTS  |        180.00 |         280.00 |
+| NORTH WOODS    |        440.00 |        4800.00 |
++----------------+---------------+----------------+
+
+
+37.Find product-wise lowest, highest and total sales.
+ select prodname, min(amount) as 'lowest amount' , max(amount) as 'highest amount' from sales group by prodname;
++-------------------------+---------------+----------------+
+| prodname                | lowest amount | highest amount |
++-------------------------+---------------+----------------+
+| RH: "GUIDE TO TENNIS"   |         34.00 |        1703.40 |
+| ACE TENNIS RACKET II    |         84.00 |        4500.00 |
+| ACE TENNIS BALLS-3 PACK |          8.40 |        3306.00 |
+| ACE TENNIS NET          |         50.00 |       29000.00 |
+| ACE TENNIS RACKET I     |         35.00 |       16569.00 |
+| SB ENERGY BAR-6 PACK    |          2.40 |        2400.00 |
+| ACE TENNIS BALLS-6 PACK |        250.00 |        5600.00 |
+| SP TENNIS RACKET        |         24.00 |        4800.00 |
+| SP JUNIOR RACKET        |       1500.00 |        2500.00 |
+| SB VITA SNACK-6 PACK    |        400.00 |        1200.00 |
++-------------------------+---------------+----------------+
+
+
+38. Find department-wise average salary for all the departments employing more than three
+employees
+select deptno, avg(sal) as 'average sal' ,count(ename) as 'no of emp' from emp group by deptno having count(ename) > 3;
++--------+-------------+-----------+
+| deptno | average sal | no of emp |
++--------+-------------+-----------+
+|     10 |   2770.0000 |         5 |
+|     20 |   2421.8750 |         8 |
+|     30 |   1852.0833 |        12 |
++--------+-------------+-----------+
+
+39. Find the customer-wise total sales for all the customers except ‘TKB SPORT SHOP’ who
+came to purchase various sports items maximum four times.
+ select custname, sum(amount) as 'Total Sales' from sales group by custname having custname <> 'TKB SPORT SHOP';
++----------------+-------------+
+| custname       | Total Sales |
++----------------+-------------+
+| JOCKSPORTS     |     5280.90 |
+| VOLLYRITE      |    27775.50 |
+| JUST TENNIS    |      764.00 |
+| EVERY MOUNTAIN |     7160.80 |
+| K + T SPORTS   |    46370.00 |
+| SHAPE UP       |      700.40 |
+| WOMENS SPORTS  |      710.00 |
+| NORTH WOODS    |     6400.00 |
++----------------+-------------+
+
+40.Display the highest, lowest, sum and average salary for all employees. Label the columns
+appropriately.
+select max(sal) as 'Highest Salary' ,min(sal) as 'Lowest Salary',sum(sal) as 'Sum' , avg(sal) as 'Average' from emp ;
++----------------+---------------+-------+-----------+
+| Highest Salary | Lowest Salary | Sum   | Average   |
++----------------+---------------+-------+-----------+
+|           5000 |           800 | 63700 | 2123.3333 |
++----------------+---------------+-------+-----------+
+
+41. Modify the above query and display the output for each job type.
+select job, max(sal) as 'Highest Salary' ,min(sal) as 'Lowest Salary',sum(sal) as 'Sum' , avg(sal) as 'Average' from emp group by job;
++---------------------+----------------+---------------+-------+-----------+
+| job                 | Highest Salary | Lowest Salary | Sum   | Average   |
++---------------------+----------------+---------------+-------+-----------+
+| Compliance officers |           1750 |          1750 |  5250 | 1750.0000 |
+| Public Relation     |           1750 |          1750 |  3500 | 1750.0000 |
+| CLERK               |           3350 |           800 | 11000 | 1571.4286 |
+| SALESMAN            |           2575 |          1250 |  9525 | 1587.5000 |
+| MANAGER             |           4150 |          1250 | 13675 | 2735.0000 |
+| ANALYST             |           3000 |          1750 |  7750 | 2583.3333 |
+| PRESIDENT           |           5000 |          5000 |  5000 | 5000.0000 |
+| vice PRESIDENT      |           5000 |          1000 |  6000 | 3000.0000 |
+| Network             |           2000 |          2000 |  2000 | 2000.0000 |
++---------------------+----------------+---------------+-------+-----------+
+
+42. List names of people who have salary less than the average salary for dept 20
+select ename,sal from emp where sal < (select avg(sal) from emp where deptno = 20);
++----------+------+
+| ename    | sal  |
++----------+------+
+| GITA     | 1750 |
+| VRUSHALI | 1750 |
+| SHARMIN  | 1750 |
+| BANDISH  | 1750 |
+| SMITH    |  800 |
+| THOMAS   | 1750 |
+| ALLEN    | 1600 |
+| WARD     | 1250 |
+| MARTIN   | 1250 |
+| TURNER   | 1500 |
+| ADAMS    | 1100 |
+| Ruhan    | 2000 |
+| Neel     | 1000 |
+| JAMES    |  950 |
+| MILLER   | 1300 |
+| AARUSH   | 1350 |
+| ALEX     | 1250 |
+| NATASHA  | 1750 |
+| SANGITA  | 1750 |
+| SUPRIYA  | 1750 |
++----------+------+
+
+
+43. Find the average annual salary per job in each department.
+select job, deptno ,avg(sal) from emp group by job,deptno;
++---------------------+--------+-----------+
+| job                 | deptno | avg(sal)  |
++---------------------+--------+-----------+
+| Compliance officers |     30 | 1750.0000 |
+| Compliance officers |     50 | 1750.0000 |
+| Public Relation     |     20 | 1750.0000 |
+| CLERK               |     20 |  950.0000 |
+| CLERK               |     10 | 2133.3333 |
+| SALESMAN            |     30 | 1587.5000 |
+| MANAGER             |     20 | 2975.0000 |
+| MANAGER             |     30 | 2750.0000 |
+| MANAGER             |     10 | 2450.0000 |
+| ANALYST             |     20 | 3000.0000 |
+| PRESIDENT           |     10 | 5000.0000 |
+| vice PRESIDENT      |     20 | 5000.0000 |
+| Network             |     60 | 2000.0000 |
+| vice PRESIDENT      |     60 | 1000.0000 |
+| CLERK               |     30 | 1350.0000 |
+| ANALYST             |     50 | 1750.0000 |
++---------------------+--------+-----------+
+
+44. Count the number of people in department 30 who receive a salary and the number of
+people who receive a commission
+
+ select deptno , count(*) as 'Number of employee' from emp where deptno=30 and sal is not null and comm is not null;
++--------+--------------------+
+| deptno | Number of employee |
++--------+--------------------+
+|     30 |                  7 |
++--------+--------------------+
+
+
+45. Compute the average, minimum and maximum salaries of these groups of employees
+having job as Clerk or manager, Display the job as well
+ select job, avg(sal) as avarage , max(sal) as maximum , min(sal) as minimum from emp where job='clerk' or job = 'manager' group by job;
++---------+-----------+---------+---------+
+| job     | avarage   | maximum | minimum |
++---------+-----------+---------+---------+
+| CLERK   | 1571.4286 |    3350 |     800 |
+| MANAGER | 2735.0000 |    4150 |    1250 |
++---------+-----------+---------+---------+
+
+46. Write an SQL command that displays 2nd highest salary paid
+select max(sal) as 'highest salary' from emp where sal < (select max(sal) from emp);
++----------------+
+| highest salary |
++----------------+
+|           4150 |
++----------------+
+
+47. Write a query to find the employees who are earning the maximum salary in their
+departments.
+select * from emp where sal in (select max(sal) from emp group by deptno);
++-------+----------+--------+---------------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+| EMPNO | ENAME    | GENDER | JOB                 | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD        | PHONE      | isActive |
++-------+----------+--------+---------------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+|  6001 | GITA     | F      | Compliance officers | 7920 | 1981-07-19 | 1750 | NULL |     30 |       1 | GITA       | sales@2017 | NULL       |        1 |
+|  6129 | VRUSHALI | F      | Compliance officers | 7920 | 1981-07-19 | 1750 | NULL |     50 |       1 | VRUSHALI   | PUN@8877   | NULL       |        1 |
+|  6473 | SHARMIN  | F      | Public Relation     | 7920 | 1981-07-19 | 1750 | NULL |     20 |       1 | SHARMIN    | a12recmpm  | NULL       |        1 |
+|  6781 | BANDISH  | F      | Public Relation     | 7920 | 1981-07-19 | 1750 | NULL |     20 |       1 | BANDISH    | a12recmpm  | NULL       |        1 |
+|  7421 | THOMAS   | M      | CLERK               | 7920 | 1981-07-19 | 1750 | NULL |     10 |       1 | THOMAS     | r50mpm     | 7032300011 |        0 |
+|  7839 | KING     | M      | PRESIDENT           | NULL | 1981-11-17 | 5000 | NULL |     10 |       1 | KING       | r50mpm     | 7132300081 |        1 |
+|  7840 | FRED     | M      | vice PRESIDENT      | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE | a12recmpm  | NULL       |        1 |
+|  7888 | Ruhan    | M      | Network             | 7888 | 1983-08-09 | 2000 | NULL |     60 |       1 | Ruhan      | BRD@1122   | NULL       |        1 |
+|  7919 | HOFFMAN  | M      | MANAGER             | 7566 | 1982-03-24 | 4150 | NULL |     30 |       3 | INTERVAL   | sales@2017 | NULL       |        1 |
+|  8433 | NATASHA  | F      | CLERK               | 7920 | 1981-07-19 | 1750 | NULL |     30 |       1 | NATASHA    | sales@2017 | NULL       |        1 |
+|  9400 | SANGITA  | F      | Compliance officers | 7920 | 1981-07-19 | 1750 | NULL |     50 |       1 | SANGITA    | NULL       | NULL       |        1 |
+|  9473 | SUPRIYA  | F      | ANALYST             | 7920 | 1981-07-19 | 1750 | NULL |     50 |       1 | SUPRIYA    | XYZ@1234   | NULL       |        1 |
++-------+----------+--------+---------------------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+
+48. Write a query to find the salesman number (repid) who has achieved the maximum total
+sales among the entire salesman.
+
+select repid from sales where amount in (select max(amount) from sales);
++-------+
+| repid |
++-------+
+|  7844 |
++-------+
+
+49. List the highest salary paid for each job.
+ select job ,max(sal) as 'Maximum Salary' from emp group by job;
++---------------------+----------------+
+| job                 | Maximum Salary |
++---------------------+----------------+
+| Compliance officers |           1750 |
+| Public Relation     |           1750 |
+| CLERK               |           3350 |
+| SALESMAN            |           2575 |
+| MANAGER             |           4150 |
+| ANALYST             |           3000 |
+| PRESIDENT           |           5000 |
+| vice PRESIDENT      |           5000 |
+| Network             |           2000 |
++---------------------+----------------+
+
+
+50. Find the most recently hired employee in each department.
+select * from emp order by hiredate desc limit 1;
++-------+-------+--------+----------------+------+------------+------+------+--------+---------+------------+-----------+-------+----------+
+| EMPNO | ENAME | GENDER | JOB            | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD       | PHONE | isActive |
++-------+-------+--------+----------------+------+------------+------+------+--------+---------+------------+-----------+-------+----------+
+|  7840 | FRED  | M      | vice PRESIDENT | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE | a12recmpm | NULL  |        1 |
++-------+-------+--------+----------------+------+------------+------+------+--------+---------+------------+-----------+-------+----------+
+
+51. In which year did most people join the company? Display the year and the number of
+employees.
+ select year(hiredate) as yearofhiring , count(year(hiredate)) as "no of emp" from emp group by yearofhiring order by count(year(hiredate)) desc limit 1;
++--------------+-----------+
+| yearofhiring | no of emp |
++--------------+-----------+
+|         1981 |        19 |
++--------------+-----------+
+
+
+52. Write a query to display employee name whose name occurs only once in the table.
+ select ename ,count(ename) as "no of occurance" from emp group by ename;
++----------+-----------------+
+| ename    | no of occurance |
++----------+-----------------+
+| GITA     |               1 |
+| VRUSHALI |               1 |
+| SHARMIN  |               1 |
+| BANDISH  |               1 |
+| SMITH    |               1 |
+| AARAV    |               1 |
+| THOMAS   |               1 |
+| ALLEN    |               1 |
+| WARD     |               1 |
+| JONES    |               1 |
+| MARTIN   |               1 |
+| BLAKE    |               1 |
+| CLARK    |               1 |
+| SCOTT    |               1 |
+| KING     |               1 |
+| FRED     |               1 |
+| TURNER   |               1 |
+| ADAMS    |               1 |
+| Ruhan    |               1 |
+| Neel     |               1 |
+| JAMES    |               1 |
+| FORD     |               1 |
+| HOFFMAN  |               1 |
+| GRASS    |               1 |
+| MILLER   |               1 |
+| AARUSH   |               1 |
+| ALEX     |               1 |
+| NATASHA  |               1 |
+| SANGITA  |               1 |
+| SUPRIYA  |               1 |
++----------+-----------------+
+
+53. Write a query to display all the details from dept table along with the no. of employee
+working in each dept.
+
+
+
 
 
