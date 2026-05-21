@@ -105,3 +105,9 @@ select c.name , o.orderdate , o.shipdate from ord o join customer c on o.custid 
 
 5. Display salesman names and names of customers they are dealing with.
 
+
+6.Display salesman who did not earn commission, with customer names whom they
+are dealing with.
+7. Display salesman names, salary, commission and their salary grades.
+
+Display all Tennis products and their price details (standard and minimum price).
