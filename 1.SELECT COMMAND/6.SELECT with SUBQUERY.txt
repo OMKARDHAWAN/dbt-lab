@@ -218,6 +218,61 @@ select ename from emp where empno = (select mgr  from emp group by mgr order by 
 
 11. List the employee who is hired the earliest and least.
 
+ select * from emp where hiredate = (select min(hiredate) from emp) or hiredate = (select max(hiredate) from emp) ;
++-------+--------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+-------+----------+
+| EMPNO | ENAME  | GENDER | JOB            | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD        | PHONE | isActive |
++-------+--------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+-------+----------+
+|  7840 | FRED   | M      | vice PRESIDENT | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE | a12recmpm  | NULL  |        1 |
+|  7888 | Ruhan  | M      | Network        | 7888 | 1983-08-09 | 2000 | NULL |     60 |       1 | Ruhan      | BRD@1122   | NULL  |        1 |
+|  7889 | Neel   | M      | vice PRESIDENT | 7839 | 1983-08-09 | 1000 | NULL |     60 |       0 | Neel       | BRD@1122   | NULL  |        1 |
+|  7920 | GRASS  | M      | SALESMAN       | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS      | sales@2017 | NULL  |        1 |
+|  7945 | AARUSH | M      | SALESMAN       | 7902 | 1980-02-14 | 1350 | 2700 |     30 |    NULL | AARUSH     | ABCDEF     | NULL  |        0 |
++-------+--------+--------+----------------+------+------------+------+------+--------+---------+------------+------------+-------+----------+
+
+12. What length of longest ename and by how many characters is it long than its nearest one?
+select max(length(ename)) - ( select max(length(ename)) from emp where length(ename) < (select max(length(ename)) from emp)) as difference from emp ;
++------------+
+| difference |
++------------+
+|          1 |
++------------+
+
+
+13. Which employees earn less than 30% of president s salary?
+select sal from emp where sal < (select sal from emp where job = 'President');
+ select ename from emp where sal < (select sal from emp where job = 'President');
++----------+
+| ename    |
++----------+
+| GITA     |
+| VRUSHALI |
+| SHARMIN  |
+| BANDISH  |
+| SMITH    |
+| AARAV    |
+| THOMAS   |
+| ALLEN    |
+| WARD     |
+| JONES    |
+| MARTIN   |
+| BLAKE    |
+| CLARK    |
+| SCOTT    |
+| TURNER   |
+| ADAMS    |
+| Ruhan    |
+| Neel     |
+| JAMES    |
+| FORD     |
+| HOFFMAN  |
+| GRASS    |
+| MILLER   |
+| AARUSH   |
+| ALEX     |
+| NATASHA  |
+| SANGITA  |
+| SUPRIYA  |
++----------+
 
 
 
