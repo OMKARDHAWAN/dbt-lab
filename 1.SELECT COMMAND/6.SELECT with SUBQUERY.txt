@@ -274,5 +274,78 @@ select sal from emp where sal < (select sal from emp where job = 'President');
 | SUPRIYA  |
 +----------+
 
+14. List the department spending highest on salary.
+ with cte as (select e.empno as eno  ,e.ename as name ,e.gender as gender ,e.job as work,e.mgr as manager ,e.hiredate as date,e.sal as salary ,e.comm as commision ,e.deptno as dptno ,e.bonusid as bid,e.`user name` as uname ,e.pwd as password,e.phone as mobno ,e.isActive as active ,d.deptno as dno,d.dname as deptname , d.loc as location ,d.pwd as passwrd ,d.startedon as start from emp e left join dept d on e.deptno = d.deptno) select deptname ,sum(salary) as TotalSalary from cte group by deptname order by TotalSalary desc limit 3;
++------------+-------------+
+| deptname   | TotalSalary |
++------------+-------------+
+| SALES      |       22225 |
+| RESEARCH   |       19375 |
+| ACCOUNTING |       13850 |
++------------+-------------+
+
+
+15. List the department having least number of staff.
+ with cte as (select e.empno as eno  ,e.ename as name ,e.gender as gender ,e.job as work,e.mgr as manager ,e.hiredate as date,e.sal as salary ,e.comm as commision ,e.deptno as dptno ,e.bonusid as bid,e.`user name` as uname ,e.pwd as password,e.phone as mobno ,e.isActive as active ,d.deptno as dno,d.dname as deptname , d.loc as location ,d.pwd as passwrd ,d.startedon as start from emp e left join dept d on e.deptno = d.deptno) select deptname ,count(*) as NoOfStaff from cte group by deptname order by NoOfStaff asc limit 1;
++----------+-----------+
+| deptname | NoOfStaff |
++----------+-----------+
+| IT       |         2 |
++----------+-----------+
+
+16. List the department having neither the highest not the lowest of avg salary.
+with cte as (select e.empno as eno  ,e.ename as name ,e.gender as gender ,e.job as work,e.mgr as manager ,e.hiredate as date,e.sal as salary ,e.comm as commision ,e.deptno as dptno ,e.bonusid as bid,e.`user name` as uname ,e.pwd as password,e.phone as mobno ,e.isActive as active ,d.deptno as dno,d.dname as deptname , d.loc as location ,d.pwd as passwrd ,d.startedon as start from emp e left join dept d on e.deptno = d.deptno) select deptname ,avg(salary) as avarageSal from cte group by deptname having avg(salary) not in (1500,2770) order by avarageSal desc;
++----------+------------+
+| deptname | avarageSal |
++----------+------------+
+| RESEARCH |  2421.8750 |
+| SALES    |  1852.0833 |
+| HR       |  1750.0000 |
++----------+------------+
+
+17. Display details of all employees as Mr. Ford works under <manger name>.
+
+18. Display employee information who have joined the organization before 'BLAKE'
+select * from emp where hiredate < (select hiredate from emp where ename = 'BLAKE');
++-------+--------+--------+----------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+| EMPNO | ENAME  | GENDER | JOB      | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME    | PWD        | PHONE      | isActive |
++-------+--------+--------+----------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+|  7369 | SMITH  | M      | CLERK    | 7902 | 1980-12-17 |  800 | NULL |     20 |       2 | TRITONE      | a12recmpm  | 7032300023 |        0 |
+|  7499 | ALLEN  | M      | SALESMAN | 7698 | 1981-02-20 | 1600 |  300 |     30 |       4 | ALWAYS TESTE | sales@2017 | 7032300096 |        1 |
+|  7521 | WARD   | M      | SALESMAN | 7698 | 1981-02-22 | 1250 |  500 |     30 |       1 | WARD         | sales@2017 | 7132300034 |        1 |
+|  7566 | JONES  | M      | MANAGER  | 7839 | 1981-04-02 | 2975 | NULL |     20 |       4 | HONEYCOMB    | a12recmpm  | 7132300039 |        1 |
+|  7920 | GRASS  | M      | SALESMAN | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS        | sales@2017 | NULL       |        1 |
+|  7945 | AARUSH | M      | SALESMAN | 7902 | 1980-02-14 | 1350 | 2700 |     30 |    NULL | AARUSH       | ABCDEF     | NULL       |        0 |
++-------+--------+--------+----------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
+
+19. Display employee information that has joined the organization before their subordinates.
+ SELECT DISTINCT e1.*
+    -> FROM emp e1
+    -> JOIN emp e2
+    -> ON e1.EMPNO = e2.MGR
+    -> WHERE e1.HIREDATE < e2.HIREDATE;
++-------+-------+--------+-----------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+| EMPNO | ENAME | GENDER | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD        | PHONE      | isActive |
++-------+-------+--------+-----------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+|  7920 | GRASS | M      | SALESMAN  | 7919 | 1980-02-14 | 2575 | 2700 |     30 |       5 | GRASS      | sales@2017 | NULL       |        1 |
+|  7902 | FORD  | M      | ANALYST   | 7566 | 1981-12-03 | 3000 | NULL |     20 |       4 | CONBRIO    | a12recmpm  | NULL       |        0 |
+|  7698 | BLAKE | M      | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |       1 | BIG BEN    | sales@2017 | 7132300027 |        1 |
+|  7566 | JONES | M      | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |       4 | HONEYCOMB  | a12recmpm  | 7132300039 |        1 |
+|  7839 | KING  | M      | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     10 |       1 | KING       | r50mpm     | 7132300081 |        1 |
+|  7788 | SCOTT | M      | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     20 |       3 | WHITE SAND | a12recmpm  | NULL       |        1 |
+|  7782 | CLARK | M      | MANAGER   | 7839 | 1981-06-09 | 2450 | NULL |     10 |       3 | CLARK      | r50mpm     | 7032300001 |        1 |
++-------+-------+--------+-----------+------+------------+------+------+--------+---------+------------+------------+------------+----------+
+
+
+20. List the employee (s) who earns the highest.
+select * from emp where sal = (select max(sal) from emp );
++-------+-------+--------+----------------+------+------------+------+------+--------+---------+------------+-----------+------------+----------+
+| EMPNO | ENAME | GENDER | JOB            | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME  | PWD       | PHONE      | isActive |
++-------+-------+--------+----------------+------+------------+------+------+--------+---------+------------+-----------+------------+----------+
+|  7839 | KING  | M      | PRESIDENT      | NULL | 1981-11-17 | 5000 | NULL |     10 |       1 | KING       | r50mpm    | 7132300081 |        1 |
+|  7840 | FRED  | M      | vice PRESIDENT | 7839 | 1983-08-09 | 5000 | NULL |     20 |       1 | SAND STONE | a12recmpm | NULL       |        1 |
++-------+-------+--------+----------------+------+------------+------+------+--------+---------+------------+-----------+------------+----------+
+
+
 
 
