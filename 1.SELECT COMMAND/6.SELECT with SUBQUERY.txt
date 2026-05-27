@@ -347,5 +347,58 @@ select * from emp where sal = (select max(sal) from emp );
 +-------+-------+--------+----------------+------+------------+------+------+--------+---------+------------+-----------+------------+----------+
 
 
+21. List the mgr in dept 10 along with their dept details as well manager refers to anyone to
+whom at least 1 person reports.
+       select * from emp e left join dept d on e.deptno = d.deptno where d.deptno = 10 and job = 'manager';
++-------+-------+--------+---------+------+------------+------+------+--------+---------+-----------+--------+------------+----------+--------+------------+----------+--------+------------+
+| EMPNO | ENAME | GENDER | JOB     | MGR  | HIREDATE   | SAL  | COMM | DEPTNO | BONUSID | USER NAME | PWD    | PHONE      | isActive | DEPTNO | DNAME      | LOC      | PWD    | STARTEDON  |
++-------+-------+--------+---------+------+------------+------+------+--------+---------+-----------+--------+------------+----------+--------+------------+----------+--------+------------+
+|  7782 | CLARK | M      | MANAGER | 7839 | 1981-06-09 | 2450 | NULL |     10 |       3 | CLARK     | r50mpm | 7032300001 |        1 |     10 | ACCOUNTING | NEW YORK | r50mpm | 24/03/1989 |
++-------+-------+--------+---------+------+------------+------+------+--------+---------+-----------+--------+------------+----------+--------+------------+----------+--------+------------+
 
 
+22. In which year did the most people join the organization? Display the year and the number
+of employees.
+select year(hiredate) as year, count(ename) as 'no of emp'  from emp group by year(hiredate) limit 1;
++------+-----------+
+| year | no of emp |
++------+-----------+
+| 1981 |        19 |
++------+-----------+
+
+23. List number, name, job, manager number and manager’s job of each employee reporting
+to them
+select e.empno,e.ename , e.job , e.mgr ,m.job from emp e join emp m on e.mgr = m.empno;
++-------+----------+---------------------+------+-----------+
+| empno | ename    | job                 | mgr  | job       |
++-------+----------+---------------------+------+-----------+
+|  6001 | GITA     | Compliance officers | 7920 | SALESMAN  |
+|  6129 | VRUSHALI | Compliance officers | 7920 | SALESMAN  |
+|  6473 | SHARMIN  | Public Relation     | 7920 | SALESMAN  |
+|  6781 | BANDISH  | Public Relation     | 7920 | SALESMAN  |
+|  7369 | SMITH    | CLERK               | 7902 | ANALYST   |
+|  7415 | AARAV    | CLERK               | 7902 | ANALYST   |
+|  7421 | THOMAS   | CLERK               | 7920 | SALESMAN  |
+|  7499 | ALLEN    | SALESMAN            | 7698 | MANAGER   |
+|  7521 | WARD     | SALESMAN            | 7698 | MANAGER   |
+|  7566 | JONES    | MANAGER             | 7839 | PRESIDENT |
+|  7654 | MARTIN   | SALESMAN            | 7698 | MANAGER   |
+|  7698 | BLAKE    | MANAGER             | 7839 | PRESIDENT |
+|  7782 | CLARK    | MANAGER             | 7839 | PRESIDENT |
+|  7788 | SCOTT    | ANALYST             | 7566 | MANAGER   |
+|  7840 | FRED     | vice PRESIDENT      | 7839 | PRESIDENT |
+|  7844 | TURNER   | SALESMAN            | 7698 | MANAGER   |
+|  7876 | ADAMS    | CLERK               | 7788 | ANALYST   |
+|  7888 | Ruhan    | Network             | 7888 | Network   |
+|  7889 | Neel     | vice PRESIDENT      | 7839 | PRESIDENT |
+|  7900 | JAMES    | CLERK               | 7698 | MANAGER   |
+|  7902 | FORD     | ANALYST             | 7566 | MANAGER   |
+|  7919 | HOFFMAN  | MANAGER             | 7566 | MANAGER   |
+|  7920 | GRASS    | SALESMAN            | 7919 | MANAGER   |
+|  7934 | MILLER   | CLERK               | 7782 | MANAGER   |
+|  7945 | AARUSH   | SALESMAN            | 7902 | ANALYST   |
+|  7949 | ALEX     | MANAGER             | 7698 | MANAGER   |
+|  8433 | NATASHA  | CLERK               | 7920 | SALESMAN  |
+|  9400 | SANGITA  | Compliance officers | 7920 | SALESMAN  |
+|  9473 | SUPRIYA  | ANALYST             | 7920 | SALESMAN  |
++-------+----------+---------------------+------+-----------+
