@@ -450,3 +450,40 @@ select deptno , count(ename) as NoOfEmp from emp where job ='clerk' group by dep
 |  7949 | ALEX   | M      | MANAGER        | 7698 | 1982-01-24 | 1250 |  500 |     30 |       5 | QUARTERREST  | sales@2017 | 7156567183 |        1 |
 +-------+--------+--------+----------------+------+------------+------+------+--------+---------+--------------+------------+------------+----------+
 
+28. Display all employee names and the locations of their departments except ‘CHICAGO’
+with cte as (select e.ename, d.loc from emp e left join dept d on e.deptno = d.deptno) select ename, loc from cte where loc <> 'chicago';
++----------+----------+
+| ename    | loc      |
++----------+----------+
+| AARAV    | NEW YORK |
+| THOMAS   | NEW YORK |
+| CLARK    | NEW YORK |
+| KING     | NEW YORK |
+| MILLER   | NEW YORK |
+| SHARMIN  | DALLAS   |
+| BANDISH  | DALLAS   |
+| SMITH    | DALLAS   |
+| JONES    | DALLAS   |
+| SCOTT    | DALLAS   |
+| FRED     | DALLAS   |
+| ADAMS    | DALLAS   |
+| FORD     | DALLAS   |
+| VRUSHALI | PUNE     |
+| SANGITA  | PUNE     |
+| SUPRIYA  | PUNE     |
+| Ruhan    | BARODA   |
+| Neel     | BARODA   |
++----------+----------+
+
+29. Display department that has no employees
+
+mysql> select deptno, count(ename) as noofEmp from emp group by deptno having noofEmp = 0;
+Empty set (0.023 sec)
+
+30. Display the products purchased by JOCK SPORTS which are not purchased by JUST TENNIS
+ select prodname from sales where custname = 'jocksports' except select prodname from sales where custname = 'JUST TENNIS';
++---------------------+
+| prodname            |
++---------------------+
+| ACE TENNIS RACKET I |
++---------------------+
