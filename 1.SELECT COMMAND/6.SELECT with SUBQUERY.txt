@@ -487,3 +487,129 @@ Empty set (0.023 sec)
 +---------------------+
 | ACE TENNIS RACKET I |
 +---------------------+
+
+
+31. Write a query to find out the employees who are first to join their departments
+select empno,ename,deptno,hiredate from emp e where hiredate = (select min(hiredate) from emp where deptno = e.deptno) order by deptno;
++-------+----------+--------+------------+
+| empno | ename    | deptno | hiredate   |
++-------+----------+--------+------------+
+|  7782 | CLARK    |     10 | 1981-06-09 |
+|  7369 | SMITH    |     20 | 1980-12-17 |
+|  7920 | GRASS    |     30 | 1980-02-14 |
+|  7945 | AARUSH   |     30 | 1980-02-14 |
+|  6129 | VRUSHALI |     50 | 1981-07-19 |
+|  9400 | SANGITA  |     50 | 1981-07-19 |
+|  9473 | SUPRIYA  |     50 | 1981-07-19 |
+|  7888 | Ruhan    |     60 | 1983-08-09 |
+|  7889 | Neel     |     60 | 1983-08-09 |
++-------+----------+--------+------------+
+
+32. Create a query to display the name, hiredate, and salary for all employees who have both
+the same salary and commission as Scott.
+
+select ename ,hiredate , sal from emp where ename <> 'Scott' and sal = (select sal from emp where ename = 'Scott') and comm = (select comm from emp where ename = 'Scott');
+Empty set (0.019 sec)
+
+
+33. List all the employees who have at least one person reporting to them.
+ select distinct e.ename, e.mgr from emp e join emp m on e.empno = m.empno;
++----------+------+
+| ename    | mgr  |
++----------+------+
+| GITA     | 7920 |
+| VRUSHALI | 7920 |
+| SHARMIN  | 7920 |
+| BANDISH  | 7920 |
+| SMITH    | 7902 |
+| AARAV    | 7902 |
+| THOMAS   | 7920 |
+| ALLEN    | 7698 |
+| WARD     | 7698 |
+| JONES    | 7839 |
+| MARTIN   | 7698 |
+| BLAKE    | 7839 |
+| CLARK    | 7839 |
+| SCOTT    | 7566 |
+| KING     | NULL |
+| FRED     | 7839 |
+| TURNER   | 7698 |
+| ADAMS    | 7788 |
+| Ruhan    | 7888 |
+| Neel     | 7839 |
+| JAMES    | 7698 |
+| FORD     | 7566 |
+| HOFFMAN  | 7566 |
+| GRASS    | 7919 |
+| MILLER   | 7782 |
+| AARUSH   | 7902 |
+| ALEX     | 7698 |
+| NATASHA  | 7920 |
+| SANGITA  | 7920 |
+| SUPRIYA  | 7920 |
++----------+------+
+
+34. List the name of the employees with their immediate higher authority.
+select distinct e.ename as manager, m.ename as manager from emp e join emp m on e.mgr = m.empno;
++----------+---------+
+| manager  | manager |
++----------+---------+
+| GITA     | GRASS   |
+| VRUSHALI | GRASS   |
+| SHARMIN  | GRASS   |
+| BANDISH  | GRASS   |
+| SMITH    | FORD    |
+| AARAV    | FORD    |
+| THOMAS   | GRASS   |
+| ALLEN    | BLAKE   |
+| WARD     | BLAKE   |
+| JONES    | KING    |
+| MARTIN   | BLAKE   |
+| BLAKE    | KING    |
+| CLARK    | KING    |
+| SCOTT    | JONES   |
+| FRED     | KING    |
+| TURNER   | BLAKE   |
+| ADAMS    | SCOTT   |
+| Ruhan    | Ruhan   |
+| Neel     | KING    |
+| JAMES    | BLAKE   |
+| FORD     | JONES   |
+| HOFFMAN  | JONES   |
+| GRASS    | HOFFMAN |
+| MILLER   | CLARK   |
+| AARUSH   | FORD    |
+| ALEX     | BLAKE   |
+| NATASHA  | GRASS   |
+| SANGITA  | GRASS   |
+| SUPRIYA  | GRASS   |
++----------+---------+
+
+
+35. List all the employees who do not manage any one.
+select ename from emp where empno not in ( select mgr from emp where mgr is not null);
++----------+
+| ename    |
++----------+
+| GITA     |
+| VRUSHALI |
+| SHARMIN  |
+| BANDISH  |
+| SMITH    |
+| AARAV    |
+| THOMAS   |
+| ALLEN    |
+| WARD     |
+| MARTIN   |
+| FRED     |
+| TURNER   |
+| ADAMS    |
+| Neel     |
+| JAMES    |
+| MILLER   |
+| AARUSH   |
+| ALEX     |
+| NATASHA  |
+| SANGITA  |
+| SUPRIYA  |
++----------+
