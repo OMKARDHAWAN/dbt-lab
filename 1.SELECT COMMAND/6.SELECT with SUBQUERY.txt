@@ -613,3 +613,94 @@ select ename from emp where empno not in ( select mgr from emp where mgr is not 
 | SANGITA  |
 | SUPRIYA  |
 +----------+
+
+36. Write a query to display a ‘*’ against the row of the most recently hired employee.
+
+ SELECT ename, hiredate,
+    ->        CASE
+    ->            WHEN hiredate = (SELECT MAX(hiredate) FROM emp)
+    ->            THEN '*'
+    ->            ELSE ''
+    ->        END AS recent_emp
+    -> FROM emp;
++----------+------------+------------+
+| ename    | hiredate   | recent_emp |
++----------+------------+------------+
+| GITA     | 1981-07-19 |            |
+| VRUSHALI | 1981-07-19 |            |
+| SHARMIN  | 1981-07-19 |            |
+| BANDISH  | 1981-07-19 |            |
+| SMITH    | 1980-12-17 |            |
+| AARAV    | 1981-12-31 |            |
+| THOMAS   | 1981-07-19 |            |
+| ALLEN    | 1981-02-20 |            |
+| WARD     | 1981-02-22 |            |
+| JONES    | 1981-04-02 |            |
+| MARTIN   | 1981-09-28 |            |
+| BLAKE    | 1981-05-01 |            |
+| CLARK    | 1981-06-09 |            |
+| SCOTT    | 1982-12-09 |            |
+| KING     | 1981-11-17 |            |
+| FRED     | 1983-08-09 | *          |
+| TURNER   | 1981-09-08 |            |
+| ADAMS    | 1983-01-12 |            |
+| Ruhan    | 1983-08-09 | *          |
+| Neel     | 1983-08-09 | *          |
+| JAMES    | 1981-12-03 |            |
+| FORD     | 1981-12-03 |            |
+| HOFFMAN  | 1982-03-24 |            |
+| GRASS    | 1980-02-14 |            |
+| MILLER   | 1982-01-23 |            |
+| AARUSH   | 1980-02-14 |            |
+| ALEX     | 1982-01-24 |            |
+| NATASHA  | 1981-07-19 |            |
+| SANGITA  | 1981-07-19 |            |
+| SUPRIYA  | 1981-07-19 |            |
++----------+------------+------------+
+
+
+37. Write a correlated sub-query to list out the employees who earn more than the average
+salary of their department.
+ SELECT ename, sal, deptno
+    -> FROM emp e
+    -> WHERE sal > (
+    ->     SELECT AVG(sal)
+    ->     FROM emp
+    ->     WHERE deptno = e.deptno
+    -> );
++---------+------+--------+
+| ename   | sal  | deptno |
++---------+------+--------+
+| AARAV   | 3350 |     10 |
+| JONES   | 2975 |     20 |
+| BLAKE   | 2850 |     30 |
+| SCOTT   | 3000 |     20 |
+| KING    | 5000 |     10 |
+| FRED    | 5000 |     20 |
+| Ruhan   | 2000 |     60 |
+| FORD    | 3000 |     20 |
+| HOFFMAN | 4150 |     30 |
+| GRASS   | 2575 |     30 |
++---------+------+--------+
+
+
+
+38. Find the 2nd maximum salary.
+
+mysql> SELECT MAX(sal) AS second_max_salary
+    -> FROM emp
+    -> WHERE sal < (SELECT MAX(sal) FROM emp);
++-------------------+
+| second_max_salary |
++-------------------+
+|              4150 |
++-------------------+
+
+
+39. Select the duplicate records (Records, which are inserted, that already exist) in the EMP
+table.
+ SELECT empno, COUNT(*)
+    -> FROM emp
+    -> GROUP BY empno
+    -> HAVING COUNT(*) > 1;
+Empty set (0.062 sec)
