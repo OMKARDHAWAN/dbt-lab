@@ -1,113 +1,268 @@
-1. Display Name of the salesperson, customer name and amount of sales.
+1) Display Name of the salesperson, customer name and amount of sales.
 
-2.List employee name and name of managers.
-select e.ename as manager , m.ename as "Employee Name" from emp e join emp m where e.empno = m.mgr;
-+---------+---------------+
-| manager | Employee Name |
-+---------+---------------+
-| GRASS   | GITA          |
-| GRASS   | VRUSHALI      |
-| GRASS   | SHARMIN       |
-| GRASS   | BANDISH       |
-| FORD    | SMITH         |
-| FORD    | AARAV         |
-| GRASS   | THOMAS        |
-| BLAKE   | ALLEN         |
-| BLAKE   | WARD          |
-| KING    | JONES         |
-| BLAKE   | MARTIN        |
-| KING    | BLAKE         |
-| KING    | CLARK         |
-| JONES   | SCOTT         |
-| KING    | FRED          |
-| BLAKE   | TURNER        |
-| SCOTT   | ADAMS         |
-| Ruhan   | Ruhan         |
-| KING    | Neel          |
-| BLAKE   | JAMES         |
-| JONES   | FORD          |
-| JONES   | HOFFMAN       |
-| HOFFMAN | GRASS         |
-| CLARK   | MILLER        |
-| FORD    | AARUSH        |
-| BLAKE   | ALEX          |
-| GRASS   | NATASHA       |
-| GRASS   | SANGITA       |
-| GRASS   | SUPRIYA       |
-+---------+---------------+
+select sname 'SalesPerson Name' , cname 'Customer Name' , amount 'Amount of Sales' from salesperson sp,customers c, sales1 s where sp.sid = c.snum and c.cname= s.customerName;
+
+Output:
++------------------+---------------+-----------------+
+| SalesPerson Name | Customer Name | Amount of Sales |
++------------------+---------------+-----------------+
+| PETER            | Saleel        |          100.00 |
+| PETER            | Nitish        |          102.00 |
++------------------+---------------+-----------------+
 
 
-3.Display details of all departments and the corresponding employees
-select e.ename , d.deptno , d.dname ,d.loc ,d.pwd,d.startedon from dept d join emp e on d.deptno = e.deptno;
-+----------+--------+------------+----------+------------+------------+
-| ename    | deptno | dname      | loc      | pwd        | startedon  |
-+----------+--------+------------+----------+------------+------------+
-| AARAV    |     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 |
-| THOMAS   |     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 |
-| CLARK    |     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 |
-| KING     |     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 |
-| MILLER   |     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 |
-| SHARMIN  |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| BANDISH  |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| SMITH    |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| JONES    |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| SCOTT    |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| FRED     |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| ADAMS    |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| FORD     |     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 |
-| GITA     |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| ALLEN    |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| WARD     |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| MARTIN   |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| BLAKE    |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| TURNER   |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| JAMES    |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| HOFFMAN  |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| GRASS    |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| AARUSH   |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| ALEX     |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| NATASHA  |     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 |
-| VRUSHALI |     50 | HR         | PUNE     | PUN@8877   | 22/12/1989 |
-| SANGITA  |     50 | HR         | PUNE     | PUN@8877   | 22/12/1989 |
-| SUPRIYA  |     50 | HR         | PUNE     | PUN@8877   | 22/12/1989 |
-| Ruhan    |     60 | IT         | BARODA   | BRD@1122   | 02/10/1989 |
-| Neel     |     60 | IT         | BARODA   | BRD@1122   | 02/10/1989 |
-+----------+--------+------------+----------+------------+------------+
 
-4. Display all customer names with their order details (order number and ship date)
-for the orders shipped in 1987.
+2) List employee name and name of managers.
 
-select c.name , o.orderdate , o.shipdate from ord o join customer c on o.custid = c.custid where year(o.orderdate) = 1987 and year(o.shipdate) = 1987 ;
-+----------------+------------+------------+
-| name           | orderdate  | shipdate   |
-+----------------+------------+------------+
-| TKB SPORT SHOP | 1987-01-07 | 1987-01-08 |
-| VOLLYRITE      | 1987-01-11 | 1987-01-11 |
-| EVERY MOUNTAIN | 1987-01-15 | 1987-01-20 |
-| NORTH WOODS    | 1987-02-01 | 1987-02-01 |
-| VOLLYRITE      | 1987-02-01 | 1987-02-05 |
-| WOMENS SPORTS  | 1987-02-01 | 1987-02-06 |
-| JUST TENNIS    | 1987-02-03 | 1987-02-10 |
-| K + T SPORTS   | 1987-02-05 | 1987-03-03 |
-| VOLLYRITE      | 1987-02-15 | 1987-03-06 |
-| EVERY MOUNTAIN | 1987-02-22 | 1987-02-04 |
-| JOCKSPORTS     | 1987-03-12 | 1987-03-12 |
-| JOCKSPORTS     | 1987-03-15 | 1987-03-01 |
-| K + T SPORTS   | 1987-01-06 | 1987-01-06 |
-| K + T SPORTS   | 1987-01-09 | 1987-01-10 |
-| WOMENS SPORTS  | 1987-01-31 | 1987-02-01 |
-| JOCKSPORTS     | 1987-02-13 | 1987-02-14 |
-| JOCKSPORTS     | 1987-03-13 | 1987-03-14 |
-| JOCKSPORTS     | 1987-03-14 | 1987-03-16 |
-| EVERY MOUNTAIN | 1987-02-21 | 1987-02-22 |
-| EVERY MOUNTAIN | 1987-02-23 | 1987-02-23 |
-+----------------+------------+------------+
+Query: select ename 'Employee Name' , name 'Nmae of Managers' from emp e,managers m where e.ename=m.name ;
 
-5. Display salesman names and names of customers they are dealing with.
+Output:
+
++---------------+------------------+
+| Employee Name | Nmae of Managers |
++---------------+------------------+
+| VRUSHALI      | vrushali         |
+| SHARMIN       | sharmin          |
+| Neel          | neel             |
++---------------+------------------+
 
 
-6.Display salesman who did not earn commission, with customer names whom they
-are dealing with.
-7. Display salesman names, salary, commission and their salary grades.
 
-Display all Tennis products and their price details (standard and minimum price).
+3) Display details of all departments and the corresponding employees
+select dept.* , ename,job,sal from dept,emp where dept.deptno=emp.deptno;
+
+Output:
+
++--------+------------+----------+------------+------------+----------+---------------------+------+
+| DEPTNO | DNAME      | LOC      | PWD        | STARTEDON  | ename    | job                 | sal  |
++--------+------------+----------+------------+------------+----------+---------------------+------+
+|     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 | AARAV    | CLERK               | 3350 |
+|     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 | THOMAS   | CLERK               | 1750 |
+|     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 | CLARK    | MANAGER             | 2450 |
+|     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 | KING     | PRESIDENT           | 5000 |
+|     10 | ACCOUNTING | NEW YORK | r50mpm     | 24/03/1989 | MILLER   | CLERK               | 1300 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | SHARMIN  | Public Relation     | 1750 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | BANDISH  | Public Relation     | 1750 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | SMITH    | CLERK               |  800 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | JONES    | MANAGER             | 2975 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | SCOTT    | ANALYST             | 3000 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | FRED     | vice PRESIDENT      | 5000 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | ADAMS    | CLERK               | 1100 |
+|     20 | RESEARCH   | DALLAS   | a12recmpm  | 12/04/1989 | FORD     | ANALYST             | 3000 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | GITA     | Compliance officers | 1750 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | ALLEN    | SALESMAN            | 1600 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | WARD     | SALESMAN            | 1250 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | MARTIN   | SALESMAN            | 1250 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | BLAKE    | MANAGER             | 2850 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | TURNER   | SALESMAN            | 1500 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | JAMES    | CLERK               |  950 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | HOFFMAN  | MANAGER             | 4150 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | GRASS    | SALESMAN            | 2575 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | AARUSH   | SALESMAN            | 1350 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | ALEX     | MANAGER             | 1250 |
+|     30 | SALES      | CHICAGO  | sales@2017 | 13/04/1989 | NATASHA  | CLERK               | 1750 |
+|     50 | HR         | PUNE     | PUN@8877   | 22/12/1989 | VRUSHALI | Compliance officers | 1750 |
+|     50 | HR         | PUNE     | PUN@8877   | 22/12/1989 | SANGITA  | Compliance officers | 1750 |
+|     50 | HR         | PUNE     | PUN@8877   | 22/12/1989 | SUPRIYA  | ANALYST             | 1750 |
+|     60 | IT         | BARODA   | BRD@1122   | 02/10/1989 | Ruhan    | Network             | 2000 |
+|     60 | IT         | BARODA   | BRD@1122   | 02/10/1989 | Neel     | vice PRESIDENT      | 1000 |
++--------+------------+----------+------------+------------+----------+---------------------+------+
+
+
+
+4) Display all customer names with their order details (order number and ship date) for the orders shipped in 1987.
+
+Query: SELECT NAME 'CUSTOMER NAME' , ORDID, SHIPDATE FROM ORD O, CUSTOMER C WHERE C.CUSTID=O.CUSTID AND YEAR(SHIPDATE)=1987;
+
+Output:
+
++----------------+-------+------------+
+| CUSTOMER NAME  | ORDID | SHIPDATE   |
++----------------+-------+------------+
+| TKB SPORT SHOP |   610 | 1987-01-08 |
+| VOLLYRITE      |   611 | 1987-01-11 |
+| EVERY MOUNTAIN |   612 | 1987-01-20 |
+| NORTH WOODS    |   613 | 1987-02-01 |
+| VOLLYRITE      |   614 | 1987-02-05 |
+| WOMENS SPORTS  |   615 | 1987-02-06 |
+| JUST TENNIS    |   616 | 1987-02-10 |
+| K + T SPORTS   |   617 | 1987-03-03 |
+| VOLLYRITE      |   618 | 1987-03-06 |
+| EVERY MOUNTAIN |   619 | 1987-02-04 |
+| JOCKSPORTS     |   620 | 1987-03-12 |
+| JOCKSPORTS     |   621 | 1987-03-01 |
+| K + T SPORTS   |   622 | 1987-01-01 |
+| K + T SPORTS   |   624 | 1987-01-06 |
+| K + T SPORTS   |   625 | 1987-01-10 |
+| WOMENS SPORTS  |   626 | 1987-02-01 |
+| JOCKSPORTS     |   627 | 1987-02-14 |
+| JOCKSPORTS     |   628 | 1987-03-14 |
+| JOCKSPORTS     |   629 | 1987-03-16 |
+| EVERY MOUNTAIN |   630 | 1987-02-22 |
+| EVERY MOUNTAIN |   631 | 1987-02-23 |
++----------------+-------+------------+
+
+
+
+5) Display salesman names and names of customers they are dealing with.
+
+SELECT SNAME,CNAME FROM SALESPERSON S, CUSTOMERS C WHERE C.SNUM=S.SID;
+
+Output:
+
++--------+---------+
+| SNAME  | CNAME   |
++--------+---------+
+| ALAN   | Santosh |
+| ALAN   | Raja    |
+| CALVIN | Raj     |
+| CALVIN | Grass   |
+| CLIVE  | Joe     |
+| DENNIS | Jackson |
+| PETER  | Saleel  |
+| PETER  | Nitish  |
+| PETER  | William |
+| PETER  | Smith   |
+| PETER  | ADAMS   |
++--------+---------+
+
+6) Display salesman who did not earn commission, with customer names whom they are dealing with.
+
+SELECT e.ename 'salesman' , s.custname 'customer name' FROM emp e JOIN sales s ON e.empno = s.repid WHERE e.job = 'SALESMAN' AND (e.comm IS NULL OR e.comm = 0);
+
+Output:  
+
++----------+---------------+
+| salesman | customer name |
++----------+---------------+
+| TURNER   | JOCKSPORTS    |
+| TURNER   | JOCKSPORTS    |
+| TURNER   | JOCKSPORTS    |
+| TURNER   | JOCKSPORTS    |
+| TURNER   | JOCKSPORTS    |
+| TURNER   | JOCKSPORTS    |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | K + T SPORTS  |
+| TURNER   | NORTH WOODS   |
+| TURNER   | NORTH WOODS   |
+| TURNER   | NORTH WOODS   |
+| TURNER   | NORTH WOODS   |
++----------+---------------+
+
+
+7) Display salesman names, salary, commission and their salary grades.
+
+SELECT ENAME,SAL,COMM,GRADE FROM EMP E JOIN SALGRADE S ON E.SAL BETWEEN S.LOSAL AND S.HISAL WHERE E.JOB='SALESMAN';
+
+Output: 
++--------+------+------+-------+
+| ENAME  | SAL  | COMM | GRADE |
++--------+------+------+-------+
+| AARUSH | 1350 | 2700 |     2 |
+| MARTIN | 1250 | 1400 |     2 |
+| WARD   | 1250 |  500 |     2 |
+| TURNER | 1500 |    0 |     3 |
+| ALLEN  | 1600 |  300 |     3 |
+| GRASS  | 2575 | 2700 |     4 |
++--------+------+------+-------+
+
+
+8) Display salesman who did not earn commission, with customer names whom they are dealing with.
+
+SELECT E.ENAME 'SALESMAN' ,C.NAME 'CUSTOMER NAMES' FROM EMP E JOIN CUSTOMER C ON E.EMPNO = C.REPID WHERE E.JOB='SALESMAN' AND (E.COMM IS NULL OR E.COMM =0);
+
+Output: 
+
++----------+----------------+
+| SALESMAN | CUSTOMER NAMES |
++----------+----------------+
+| TURNER   | JOCKSPORTS     |
+| TURNER   | K + T SPORTS   |
+| TURNER   | NORTH WOODS    |
++----------+----------------+
+
+
+9) Display the products purchased by either JOCKSPORTS (customer number 100) or JUST TENNIS (customer number 103) or both of them.
+
+ SELECT C.CUSTID, C.NAME , S.PRODNAME FROM CUSTOMER C JOIN SALES S ON C.CUSTID=S.CUSTID WHERE C.CUSTID IN (100,103);
+
+Output: 
+
++--------+-------------+-------------------------+
+| CUSTID | NAME        | PRODNAME                |
++--------+-------------+-------------------------+
+|    100 | JOCKSPORTS  | RH: "GUIDE TO TENNIS"   |
+|    100 | JOCKSPORTS  | ACE TENNIS RACKET II    |
+|    100 | JOCKSPORTS  | ACE TENNIS BALLS-3 PACK |
+|    100 | JOCKSPORTS  | ACE TENNIS NET          |
+|    100 | JOCKSPORTS  | ACE TENNIS RACKET I     |
+|    100 | JOCKSPORTS  | SB ENERGY BAR-6 PACK    |
+|    103 | JUST TENNIS | ACE TENNIS RACKET II    |
+|    103 | JUST TENNIS | ACE TENNIS BALLS-3 PACK |
+|    103 | JUST TENNIS | ACE TENNIS NET          |
+|    103 | JUST TENNIS | RH: "GUIDE TO TENNIS"   |
+|    103 | JUST TENNIS | SB ENERGY BAR-6 PACK    |
++--------+-------------+-------------------------+
+
+
+10)Display the department name, and salary of any employee whose salary and commission matches both the salary and commission of any employee in DALLAS.
+
+select d.dname, e.sal from emp e join dept d on e.deptno=d.deptno where (e.sal, ifnull(e.comm,0)) in (select sal, ifnull(comm,0) from emp e2 join dept d2 on e2.deptno=d2.deptno where d2.loc='dallas');
+
+Output:
+
++------------+------+
+| dname      | sal  |
++------------+------+
+| SALES      | 1750 |
+| HR         | 1750 |
+| RESEARCH   | 1750 |
+| RESEARCH   | 1750 |
+| RESEARCH   |  800 |
+| ACCOUNTING | 1750 |
+| RESEARCH   | 2975 |
+| RESEARCH   | 3000 |
+| ACCOUNTING | 5000 |
+| RESEARCH   | 5000 |
+| RESEARCH   | 1100 |
+| RESEARCH   | 3000 |
+| SALES      | 1750 |
+| HR         | 1750 |
+| HR         | 1750 |
++------------+------+
+
+
+11)List out the common jobs in Research and Accounting Departments in ascending order.
+
+select d.deptno, d.dname, e.job from dept d join emp e on d.deptno=e.deptno where d.dname in ('accounting','research') order by dname ;
+
+Output:
+
++--------+------------+-----------------+
+| deptno | dname      | job             |
++--------+------------+-----------------+
+|     10 | ACCOUNTING | CLERK           |
+|     10 | ACCOUNTING | CLERK           |
+|     10 | ACCOUNTING | MANAGER         |
+|     10 | ACCOUNTING | PRESIDENT       |
+|     10 | ACCOUNTING | CLERK           |
+|     20 | RESEARCH   | Public Relation |
+|     20 | RESEARCH   | Public Relation |
+|     20 | RESEARCH   | CLERK           |
+|     20 | RESEARCH   | MANAGER         |
+|     20 | RESEARCH   | ANALYST         |
+|     20 | RESEARCH   | vice PRESIDENT  |
+|     20 | RESEARCH   | CLERK           |
+|     20 | RESEARCH   | ANALYST         |
++--------+------------+-----------------+
+
+
+

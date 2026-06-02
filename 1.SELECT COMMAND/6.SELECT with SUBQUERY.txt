@@ -704,3 +704,5 @@ table.
     -> GROUP BY empno
     -> HAVING COUNT(*) > 1;
 Empty set (0.062 sec)
+
+
